@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import clsx from "clsx";
 
 type ButtonProps = {
@@ -25,7 +24,6 @@ type ButtonProps = {
 export default function Button({
   children,
   className,
-  href,
   type = "button",
   variant = "primary",
   onClick,
@@ -36,21 +34,14 @@ export default function Button({
     `btn-${variant}`,
     "rounded-none",
     "text-base",
-    "text-black",
     "font-normal",
     "py-8",
     "px-15",
+    "text-black",
+    variant === "primary" && "bg-white",
     disabled && "btn-disabled",
     className
   );
-
-  if (href) {
-    return (
-      <Link href={href} className={classes}>
-        {children}
-      </Link>
-    );
-  }
 
   return (
     <button
