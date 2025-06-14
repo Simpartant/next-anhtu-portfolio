@@ -1,0 +1,22 @@
+{
+  "IndexPage": {
+    "title": "next-intl example"
+  },
+  "NotFoundPage": {
+    "description": "Please double-check the browser address bar or use the navigation to go to a known page.",
+    "title": "Page not found"
+  },
+  "Navigation": {
+    "home": "HOME",
+    "about": "ABOUT",
+    "product": "PRODUCT",
+    "subMenuHeading": {
+      "area": "Area",
+      "projects": "Projects",
+      "typeOfApartments": "Types of Apartments"
+    },
+    "blogs": "BLOGS",
+    "contact": "CONTACT",
+    "position": "Nguyễn Anh Tú Investment Consultant"
+  }
+}

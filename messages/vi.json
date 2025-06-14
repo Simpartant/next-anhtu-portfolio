@@ -1,0 +1,22 @@
+{
+  "IndexPage": {
+    "title": "next-intl ví dụ"
+  },
+  "NotFoundPage": {
+    "description": "Vui lòng kiểm tra lại thanh địa chỉ trình duyệt hoặc sử dụng điều hướng để đi đến một trang đã biết.",
+    "title": "Trang không tìm thấy"
+  },
+  "Navigation": {
+    "home": "TRANG CHỦ",
+    "about": "GIỚI THIỆU",
+    "product": "SẢN PHẨM",
+    "subMenuHeading": {
+      "area": "Khu vực",
+      "projects": "Dự án",
+      "typeOfApartments": "Loại căn hộ"
+    },
+    "blogs": "BÀI VIẾT",
+    "contact": "LIÊN HỆ",
+    "position": "Nguyễn Anh Tú Nhà tư vấn Bất động sản"
+  }
+}
