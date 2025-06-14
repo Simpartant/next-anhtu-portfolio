@@ -21,7 +21,7 @@ export default function ListLogo() {
           key={logo.alt}
           src={logo.src}
           alt={logo.alt}
-          className={`h-auto object-contain w-30 lg:w-40${
+          className={`h-auto object-contain w-25 lg:w-40${
             idx >= 3 ? " max-sm:mt-3" : ""
           }`}
         />
