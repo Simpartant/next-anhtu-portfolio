@@ -18,5 +18,15 @@
     "blogs": "BÀI VIẾT",
     "contact": "LIÊN HỆ",
     "position": "Nguyễn Anh Tú Nhà tư vấn Bất động sản"
+  },
+  "Footer": {
+    "home": "Trang Chủ",
+    "about": "Giới Thiệu",
+    "product": "Sản Phẩm",
+    "blogs": "Bài Viết",
+    "contact": "Liên Hệ",
+    "privacyPolicy": "Chính sách bảo mật",
+    "termOfService": "Điều khoản dịch vụ",
+    "copyright": "© 2025 Nguyễn Anh Tú. All rights reserved."
   }
 }

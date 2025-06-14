@@ -21,6 +21,16 @@ declare const messages: {
     "blogs": "BLOGS",
     "contact": "CONTACT",
     "position": "Nguyễn Anh Tú Investment Consultant"
+  },
+  "Footer": {
+    "home": "Home",
+    "about": "About",
+    "product": "Product",
+    "blogs": "Blogs",
+    "contact": "Contact",
+    "privacyPolicy": "Privacy Policy",
+    "termOfService": "Terms of Service",
+    "copyright": "© 2025 Nguyễn Anh Tú. All rights reserved."
   }
 };
 export default messages;
