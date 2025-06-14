@@ -31,6 +31,11 @@ declare const messages: {
     "privacyPolicy": "Privacy Policy",
     "termOfService": "Terms of Service",
     "copyright": "© 2025 Nguyễn Anh Tú. All rights reserved."
+  },
+  "Hero": {
+    "title": "Empower Your Financial Future with Precision and Insight",
+    "description": "Step into the world of strategic investment with Nguyễn Anh Tú, where deep expertise meets tailored financial vision. With a refined approach to wealth management and a commitment to long-term growth, Tú delivers personalized guidance that transforms opportunities into lasting success.",
+    "contactNow": "Contact Now"
   }
 };
 export default messages;
