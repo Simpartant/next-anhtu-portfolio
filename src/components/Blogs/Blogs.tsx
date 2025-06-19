@@ -22,7 +22,9 @@ export default function Blogs() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await fetch("/api/blogs");
+        const response = await fetch(
+          "https://next-anhtu-portfolio.vercel.app/api/blogs"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch blogs");
         }
