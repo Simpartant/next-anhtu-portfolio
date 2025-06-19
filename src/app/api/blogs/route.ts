@@ -5,19 +5,26 @@ import { checkToken } from "@/lib/checkToken";
 
 export async function POST(req: NextRequest) {
   const user = checkToken(req);
+  console.log("User from token:", user);
   if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   await connectDB();
 
-  const { title, content, slug } = await req.json();
+  const { title, content, slug, image, description } = await req.json();
 
-  if (!title || !content || !slug) {
+  if (!title || !content || !slug || !image || !description) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
   try {
-    const newBlog = await Blog.create({ title, content, slug });
+    const newBlog = await Blog.create({
+      title,
+      content,
+      slug,
+      image,
+      description,
+    });
     return NextResponse.json(newBlog, { status: 201 });
   } catch (err) {
     console.error("Error creating blog:", err);

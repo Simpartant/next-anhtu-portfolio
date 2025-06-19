@@ -4,6 +4,8 @@ const BlogSchema = new Schema(
   {
     title: String,
     content: String,
+    image: String,
+    description: String,
     slug: { type: String, unique: true },
     createdAt: { type: Date, default: Date.now },
   },

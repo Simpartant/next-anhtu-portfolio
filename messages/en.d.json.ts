@@ -36,6 +36,11 @@ declare const messages: {
     "title": "Empower Your Financial Future with Precision and Insight",
     "description": "Step into the world of strategic investment with Nguyễn Anh Tú, where deep expertise meets tailored financial vision. With a refined approach to wealth management and a commitment to long-term growth, Tú delivers personalized guidance that transforms opportunities into lasting success.",
     "contactNow": "Contact Now"
+  },
+  "BlogPage": {
+    "title": "BLOGS",
+    "seeAllBlogs": "See all blogs",
+    "dateCreated": "Date Created"
   }
 };
 export default messages;

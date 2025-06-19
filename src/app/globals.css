@@ -24,3 +24,11 @@ body {
   background: var(--background);
   color: var(--color-primary);
 }
+
+.bg-primary-2 {
+  background-color: #292929 !important;
+}
+
+.btn-primary-2 {
+  background-color: #292929 !important;
+}
