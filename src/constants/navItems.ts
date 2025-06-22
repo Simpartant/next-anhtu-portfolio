@@ -25,7 +25,7 @@ export function getNavItems(t: TFunction): NavItem[] {
           ],
         },
         {
-          name: t("subMenuHeading.projects"),
+          name: t("subMenuHeading.products"),
           subMenuItem: [
             { name: "Vinhome city", href: "/" },
             { name: "The sóng", href: "/" },

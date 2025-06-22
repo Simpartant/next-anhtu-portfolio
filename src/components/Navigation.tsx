@@ -160,7 +160,7 @@ export default function Navigation() {
               </div>
               <MobileMenu navItems={navItems} />
             </div>
-            <Link className="max-md:hidden" href="/">
+            <Link className="max-lg:hidden" href="/">
               <Image src={FullLogo} alt="full logo" />
             </Link>
           </div>

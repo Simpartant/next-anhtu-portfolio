@@ -31,14 +31,14 @@ export default function BlogCard({
 
   return (
     <Link href={`/blogs/${slug}`} className="block">
-      <div className="bg-primary-2 lg:w-120 shadow-sm hover:shadow-lg transition rounded-[30px] flex flex-col h-full">
+      <div className="bg-primary-2 lg:w-120 shadow-sm hover:shadow-lg transition rounded-[30px] rounded-t-lg flex flex-col h-full">
         <figure>
           <Image
             src={imageUrl}
             alt={title}
             width={400}
             height={250}
-            className="w-full h-[250px] object-cover rounded-t-[30px]"
+            className="w-full h-[250px] object-cover"
           />
         </figure>
         <div className="p-6 flex flex-col gap-4 flex-1">

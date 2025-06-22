@@ -5,7 +5,7 @@ export default function SideMenu() {
     <>
       <Link href={"/admin/dashboard"}>Dashboard</Link>
       <Link href={"/admin/blogs"}>Blogs</Link>
-      <Link href={"/admin/projecs"}>Project</Link>
+      <Link href={"/admin/prodcuts"}>Products</Link>
     </>
   );
 }

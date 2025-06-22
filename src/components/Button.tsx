@@ -34,7 +34,6 @@ export default function Button({
     `btn-${variant}`,
     "rounded-none",
     "text-base",
-    "font-normal",
     "py-8",
     "px-15",
     "text-black",

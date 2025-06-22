@@ -12,7 +12,7 @@
     "product": "SẢN PHẨM",
     "subMenuHeading": {
       "area": "Khu vực",
-      "projects": "Dự án",
+      "products": "Dự án",
       "typeOfApartments": "Loại căn hộ"
     },
     "blogs": "BÀI VIẾT",
@@ -38,5 +38,32 @@
     "title": "GÓC NHÌN BẤT ĐỘNG SẢN",
     "seeAllBlogs": "Xem tất cả bài viết",
     "dateCreated": "Ngày tạo"
+  },
+  "ProductPage": {
+    "title": "SẢN PHẨM",
+    "seeAllProducts": "Xem tất cả sản phẩm",
+    "productDetails": "Chi tiết sản phẩm"
+  },
+  "ActionComponent": {
+    "action": "Liên hệ ngay",
+    "actionDescription": "Cần tư vấn về việc mua bất động sản"
+  },
+  "ClientFeedback": {
+    "title": "Phản hồi của Khách hàng"
+  },
+  "ContactMe": {
+    "title": "Liên hệ với tôi",
+    "name": "Tên của bạn",
+    "validation": {
+      "nameMustBe3or30Characters": "Phải từ 3 đến 30 ký tự",
+      "nameNotIncludeNumber": "chỉ sử dụng chữ cái",
+      "emailMustBeValid": "Nhập địa chỉ email hợp lệ",
+      "phoneValidate": "Phải là 10 chữ số"
+    },
+    "email": "Email của bạn",
+    "message": "Tin nhắn của bạn",
+    "sendMessage": "Gửi Tin nhắn",
+    "selectProject": "Chọn Dự án",
+    "messagePlaceholder": "Example / Ví dụ:\n- Tôi là người Trung Quốc / I'm Chinese\n- Tôi là người Hàn Quốc / I'm Korean\n- Tôi là người Nhật / I'm Japanese\n- Tôi là người Thái Lan / I'm Thai\n- Tôi là người Singapore / I'm Singaporean\n- Tôi là người Pháp / I'm French\n- Tôi cần tư vấn về... / I need consultation about..."
   }
 }

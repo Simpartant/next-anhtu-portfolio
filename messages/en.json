@@ -12,7 +12,7 @@
     "product": "PRODUCT",
     "subMenuHeading": {
       "area": "Area",
-      "projects": "Projects",
+      "products": "Products",
       "typeOfApartments": "Types of Apartments"
     },
     "blogs": "BLOGS",
@@ -38,5 +38,32 @@
     "title": "BLOGS",
     "seeAllBlogs": "See all blogs",
     "dateCreated": "Date Created"
+  },
+  "ProductPage": {
+    "title": "PRODUCTS",
+    "seeAllProducts": "See all products",
+    "productDetails": "Product Details"
+  },
+  "ActionComponent": {
+    "action": "Contact Now",
+    "actionDescription": "Need advice on buying real estate"
+  },
+  "ClientFeedback": {
+    "title": "Client Feedback"
+  },
+  "ContactMe": {
+    "title": "Contact Me",
+    "name": "Your Name",
+    "validation": {
+      "nameMustBe3or30Characters": "Must be 3 to 30 characters",
+      "nameNotIncludeNumber": "only letters are allowed",
+      "emailMustBeValid": "Enter a valid email address",
+      "phoneValidate": "Must be 10 digits"
+    },
+    "email": "Your Email",
+    "message": "Your Message",
+    "sendMessage": "Send Message",
+    "selectProject": "Select Project",
+    "messagePlaceholder": "Example / Ví dụ:\n- Tôi là người Trung Quốc / I'm Chinese\n- Tôi là người Hàn Quốc / I'm Korean\n- Tôi là người Nhật / I'm Japanese\n- Tôi là người Thái Lan / I'm Thai\n- Tôi là người Singapore / I'm Singaporean\n- Tôi là người Pháp / I'm French\n- Tôi cần tư vấn về... / I need consultation about..."
   }
 }

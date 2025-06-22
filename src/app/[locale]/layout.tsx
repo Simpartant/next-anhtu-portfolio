@@ -3,6 +3,7 @@ import { Locale, hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ReactNode } from "react";
 import { Montserrat } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import { routing } from "@/i18n/routing";
 import { clsx } from "clsx";
 import { headers } from "next/headers";
@@ -51,6 +52,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html className="h-full" lang={locale}>
       <body className={clsx(montserrat.className, "")}>
         <NextIntlClientProvider>
+          <Toaster />
           {!isAdmin && <Navigation />}
           <div className="container mx-auto h-full">{children}</div>
           {!isAdmin && <Footer />}

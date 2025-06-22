@@ -5,7 +5,7 @@ import { checkToken } from "@/lib/checkToken";
 
 export async function POST(req: NextRequest) {
   const user = checkToken(req);
-  console.log("User from token:", user);
+
   if (!user) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
