@@ -47,6 +47,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const link = (await headersList).get("link");
 
   const isAdmin = link?.includes("/admin");
+  const isAbout = link?.includes(`${locale}/about`);
 
   return (
     <html className="h-full" lang={locale}>
@@ -54,7 +55,11 @@ export default async function LocaleLayout({ children, params }: Props) {
         <NextIntlClientProvider>
           <Toaster />
           {!isAdmin && <Navigation />}
-          <div className="container mx-auto h-full">{children}</div>
+          {isAbout ? (
+            <>{children}</>
+          ) : (
+            <div className="container mx-auto h-full">{children}</div>
+          )}
           {!isAdmin && <Footer />}
         </NextIntlClientProvider>
       </body>

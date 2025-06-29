@@ -39,7 +39,6 @@ export default function Products() {
       try {
         const res = await fetch("/api/products/apartment-type");
         const data = await res.json();
-        console.log(data);
         setApartmentTypes(data.apartmentTypes || []);
       } catch (error) {
         console.error("Failed to fetch apartment types:", error);

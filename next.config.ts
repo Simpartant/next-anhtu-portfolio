@@ -16,6 +16,9 @@ const config: NextConfig = {
       },
     ];
   },
+  // images: {
+  //   domains: ["storage.googleapis.com"],
+  // },
 };
 
 export default withNextIntl(config);

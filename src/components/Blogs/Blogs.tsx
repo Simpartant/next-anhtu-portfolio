@@ -28,7 +28,6 @@ export default function Blogs() {
         }
         const data = await response.json();
         // Here you can set the fetched blogs to state if needed
-        console.log(data);
         setBlogs(data);
       } catch (error) {
         console.error("Error fetching blogs:", error);

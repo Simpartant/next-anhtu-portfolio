@@ -87,7 +87,6 @@ export default function ContactMe() {
     });
     toast.success("Gửi thành công!");
     e.currentTarget.reset();
-    console.log(values);
   };
 
   return (
