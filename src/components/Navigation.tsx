@@ -22,13 +22,13 @@ function RenderSubMenu({
 }) {
   return (
     <ul className="p-2">
-      {subItems.map((subItem) => (
-        <li key={subItem.name}>
+      {subItems.map((subItem, index) => (
+        <li key={`submenu-${index}`}>
           <div className="font-bold">{subItem.name}</div>
           {subItem.subMenuItem?.length > 0 && (
             <ul>
-              {subItem.subMenuItem.map((subMenu) => (
-                <li key={subMenu.href + subMenu.name}>
+              {subItem.subMenuItem.map((subMenu, subMenuIndex) => (
+                <li key={`submenu-item-${index}-${subMenuIndex}`}>
                   <Link href={subMenu.href} onClick={onItemClick}>
                     {subMenu.name}
                   </Link>
@@ -43,19 +43,73 @@ function RenderSubMenu({
 }
 
 function MobileMenu({ navItems }: { navItems: NavItem[] }) {
+  const mobileMenuRef = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node)
+      ) {
+        // Close the mobile dropdown by removing focus
+        const dropdownButton = document.querySelector(
+          ".dropdown .btn-ghost"
+        ) as HTMLElement;
+        if (dropdownButton) {
+          dropdownButton.blur();
+        }
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const closeMobileDropdown = () => {
+    // Multiple approaches to ensure dropdown closes
+    const dropdownButton = document.querySelector(
+      ".dropdown .btn-ghost"
+    ) as HTMLElement;
+    const dropdown = document.querySelector(".dropdown") as HTMLElement;
+
+    if (dropdownButton) {
+      dropdownButton.blur();
+    }
+
+    // Force remove focus from any focused element within dropdown
+    if (dropdown) {
+      const focusedElement = dropdown.querySelector(":focus") as HTMLElement;
+      if (focusedElement) {
+        focusedElement.blur();
+      }
+    }
+
+    // Trigger a click outside to close dropdown
+    setTimeout(() => {
+      document.body.click();
+    }, 10);
+  };
+
   return (
     <ul
+      ref={mobileMenuRef}
       tabIndex={0}
-      className="menu menu-sm dropdown-content bg-neutral rounded-box z-1 mt-3 w-52 p-2 shadow"
+      className="menu menu-sm dropdown-content bg-neutral rounded-box z-50 mt-3 w-52 p-2 shadow"
     >
-      {navItems.map((item) => (
-        <li key={item.href ?? item.name}>
+      {navItems.map((item, index) => (
+        <li key={`mobile-nav-${index}`}>
           {!item.subItems ? (
-            <Link href={item.href!}>{item.name}</Link>
+            <Link href={item.href!} onClick={closeMobileDropdown}>
+              {item.name}
+            </Link>
           ) : (
             <>
               <a>{item.name}</a>
-              <RenderSubMenu subItems={item.subItems} />
+              <RenderSubMenu
+                subItems={item.subItems}
+                onItemClick={closeMobileDropdown}
+              />
             </>
           )}
         </li>
@@ -91,24 +145,26 @@ function DesktopMenu({ navItems }: { navItems: NavItem[] }) {
 
   return (
     <ul className="menu menu-horizontal px-1" ref={menuRef}>
-      {navItems.map((item) => (
-        <li className="mr-5 text-base relative" key={item.href ?? item.name}>
+      {navItems.map((item, index) => (
+        <li className="mr-5 text-base relative" key={`desktop-nav-${index}`}>
           {!item.subItems ? (
             <Link href={item.href!}>{item.name}</Link>
           ) : (
             <details className="group">
               <summary className="cursor-pointer">{item.name}</summary>
               <ul
-                className="menu xl:menu-horizontal bg-neutral rounded-box lg:min-w-max absolute left-1/2 z-10 mt-2"
+                className="menu xl:menu-horizontal bg-neutral rounded-box lg:min-w-max absolute left-1/2 z-50 mt-2"
                 style={{ transform: "translateX(-50%)" }}
               >
-                {item.subItems.map((subItem) => (
-                  <li key={subItem.name}>
+                {item.subItems.map((subItem, subIndex) => (
+                  <li key={`desktop-sub-${index}-${subIndex}`}>
                     <div className="font-bold">{subItem.name}</div>
                     {subItem.subMenuItem?.length > 0 && (
                       <ul>
-                        {subItem.subMenuItem.map((subMenu) => (
-                          <li key={subMenu.href + subMenu.name}>
+                        {subItem.subMenuItem.map((subMenu, subMenuIndex) => (
+                          <li
+                            key={`desktop-submenu-${index}-${subIndex}-${subMenuIndex}`}
+                          >
                             <Link
                               href={subMenu.href}
                               onClick={closeAllDropdowns}
@@ -135,7 +191,7 @@ export default function Navigation() {
   const navItems: NavItem[] = getNavItems(t);
 
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex w-full flex-col z-50">
       <SwitchLocale />
       <div className="divider bg-neutral m-0"></div>
       <div className="navbar bg-neutral shadow-sm py-5">

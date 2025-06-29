@@ -6,11 +6,8 @@ import { Montserrat } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import { routing } from "@/i18n/routing";
 import { clsx } from "clsx";
-import { headers } from "next/headers";
 import "../globals.css";
-
-import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
+import ConditionalLayout from "@/components/ConditionalLayout";
 
 type Props = {
   children: ReactNode;
@@ -43,24 +40,12 @@ export default async function LocaleLayout({ children, params }: Props) {
   // Enable static rendering
   setRequestLocale(locale);
 
-  const headersList = headers();
-  const link = (await headersList).get("link");
-
-  const isAdmin = link?.includes("/admin");
-  const isAbout = link?.includes(`${locale}/about`);
-
   return (
     <html className="h-full" lang={locale}>
       <body className={clsx(montserrat.className, "")}>
         <NextIntlClientProvider>
           <Toaster />
-          {!isAdmin && <Navigation />}
-          {isAbout ? (
-            <>{children}</>
-          ) : (
-            <div className="container mx-auto h-full">{children}</div>
-          )}
-          {!isAdmin && <Footer />}
+          <ConditionalLayout>{children}</ConditionalLayout>
         </NextIntlClientProvider>
       </body>
     </html>
