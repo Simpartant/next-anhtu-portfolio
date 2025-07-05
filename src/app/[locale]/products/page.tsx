@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import ProductCard from "@/components/Products/ProductCard";
@@ -14,7 +14,7 @@ interface ProductProps {
   slug: string;
 }
 
-export default function ProductsPage() {
+function ProductsPageContent() {
   const [products, setProducts] = useState<ProductProps[]>([]);
   const [apartmentTypes, setApartmentTypes] = useState<string[]>([]);
   const [areas, setAreas] = useState<string[]>([]);
@@ -778,5 +778,24 @@ export default function ProductsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+function ProductsPageLoading() {
+  return (
+    <div className="container mx-auto py-20">
+      <div className="text-4xl mb-16">Products</div>
+      <div className="flex justify-center items-center h-64">
+        <div className="loading loading-spinner loading-lg"></div>
+      </div>
+    </div>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<ProductsPageLoading />}>
+      <ProductsPageContent />
+    </Suspense>
   );
 }
