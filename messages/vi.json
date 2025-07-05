@@ -1,6 +1,6 @@
 {
   "IndexPage": {
-    "title": "next-intl ví dụ"
+    "title": "Nguyễn Anh Tú Nhà tư vấn Bất động sản"
   },
   "NotFoundPage": {
     "description": "Vui lòng kiểm tra lại thanh địa chỉ trình duyệt hoặc sử dụng điều hướng để đi đến một trang đã biết.",
@@ -15,7 +15,7 @@
       "products": "Dự án",
       "typeOfApartments": "Loại căn hộ"
     },
-    "blogs": "BÀI VIẾT",
+    "blogs": "Góc nhìn BĐS",
     "contact": "LIÊN HỆ",
     "position": "Nguyễn Anh Tú Nhà tư vấn Bất động sản"
   },
@@ -23,7 +23,7 @@
     "home": "Trang Chủ",
     "about": "Giới Thiệu",
     "product": "Sản Phẩm",
-    "blogs": "Bài Viết",
+    "blogs": "Góc nhìn BĐS",
     "contact": "Liên Hệ",
     "privacyPolicy": "Chính sách bảo mật",
     "termOfService": "Điều khoản dịch vụ",
@@ -37,12 +37,25 @@
   "BlogPage": {
     "title": "GÓC NHÌN BẤT ĐỘNG SẢN",
     "seeAllBlogs": "Xem tất cả bài viết",
-    "dateCreated": "Ngày tạo"
+    "dateCreated": "Ngày tạo",
+    "searchBlogByTitle": "Tìm kiếm bài viết theo tiêu đề",
+    "noBlogFound": "Không tìm thấy bài viết nào phù hợp với tìm kiếm của bạn.",
+    "noBlogAvailable": "Không có bài viết nào hiện có."
   },
   "ProductPage": {
     "title": "SẢN PHẨM",
     "seeAllProducts": "Xem tất cả sản phẩm",
-    "productDetails": "Chi tiết sản phẩm"
+    "productDetails": "Chi tiết sản phẩm",
+    "noProductFound": "Không tìm thấy sản phẩm",
+    "filter": {
+      "investor": "Nhà đầu tư",
+      "project": "Dự án",
+      "area": "Khu vực",
+      "typeOfApartment": "Loại căn hộ",
+      "all": "Tất cả",
+      "allProjects": "Tất cả Dự án",
+      "clearAllFilters": "Xóa tất cả bộ lọc"
+    }
   },
   "ActionComponent": {
     "action": "Liên hệ ngay",
@@ -78,5 +91,9 @@
     "about1": "Theo Nguyễn Anh Tú, một chuyên gia tư vấn đầu tư bất động sản không chỉ là người giới thiệu sản phẩm, mà là người truyền tải được tinh thần và tầm nhìn dài hạn trong mỗi thương vụ. Một bất động sản lý tưởng không chỉ nằm ở vị trí hay giá trị tài chính, mà còn phản ánh cách sống, phong cách và khát vọng của chính chủ sở hữu. Việc lựa chọn đúng không gian để sống hay đầu tư, chính là bước đầu tiên trong hành trình xây dựng một cuộc sống thịnh vượng và bền vững – nơi ta không chỉ “ở”, mà thật sự gọi là “nhà”.",
     "about2": "Với triết lý lấy con người làm trung tâm, Nguyễn Anh Tú luôn đặt mong muốn, cảm nhận và mục tiêu tài chính của từng khách hàng làm kim chỉ nam trong mọi quyết định tư vấn. Mỗi sản phẩm mà Tú giới thiệu không đơn thuần là bất động sản – đó là một phần của chiến lược dài hạn, được cá nhân hóa để phản ánh lối sống, thẩm mỹ và mục tiêu riêng biệt của từng khách hàng.",
     "about3": "Làm việc bằng cả niềm đam mê và trực giác tinh tế, Nguyễn Anh Tú luôn nỗ lực kết nối khách hàng với những tài sản mang dấu ấn cá nhân, từ đó mở ra cánh cửa bước vào một thế giới sống và đầu tư vừa hiệu quả, vừa giàu cảm xúc."
+  },
+  "Discover": {
+    "title": "ĐỘI NGŨ CỦA CHÚNG TÔI",
+    "description": "Chúng tôi là một nhóm các thành viên sáng tạo, giàu kinh nghiệm và thành thạo. Bạn sẽ thích hợp tác với chúng tôi."
   }
 }

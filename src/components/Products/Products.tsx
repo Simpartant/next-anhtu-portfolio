@@ -61,7 +61,9 @@ export default function Products() {
         <div className="mt-12 flex flex-wrap gap-2">
           <button
             className={`btn btn-primary-2 rounded-xl ${
-              selectedType === null ? "font-bold" : "font-normal"
+              selectedType === null
+                ? "font-bold border-2 border-gray-600"
+                : "font-normal"
             }`}
             onClick={() => setSelectedType(null)}
           >
@@ -71,7 +73,9 @@ export default function Products() {
             <button
               key={type}
               className={`btn btn-primary-2 rounded-xl ${
-                selectedType === type ? "font-bold" : "font-normal"
+                selectedType === type
+                  ? "font-bold border-2 border-gray-600"
+                  : "font-normal"
               }`}
               onClick={() => setSelectedType(type)}
             >

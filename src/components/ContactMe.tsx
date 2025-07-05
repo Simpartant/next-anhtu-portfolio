@@ -30,7 +30,7 @@ const IconInput = ({
   minLength?: number;
   maxLength?: number;
   title?: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   validationMsg: string;
 }) => (
   <div className="mb-4">

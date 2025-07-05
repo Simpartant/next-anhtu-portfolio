@@ -9,7 +9,12 @@ export default function Hero() {
   return (
     <div className="w-full py-10 lg:py-20">
       <div className="flex flex-col lg:flex-row-reverse items-center justify-between">
-        <Image src={heroImage} alt="hero-image" priority />
+        <Image
+          src={heroImage}
+          alt="hero-image"
+          priority
+          className="w-max-[20rem] md:w-[30rem] lg:w-[40rem]"
+        />
         <div className="flex flex-col p-8 lg:p-0 gap-2 lg:gap-5 items-start lg:w-180">
           <h1 className="text-5xl font-bold leading-[1.3]">{t("title")}</h1>
           <p className="py-6">{t("description")}</p>

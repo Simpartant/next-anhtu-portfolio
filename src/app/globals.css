@@ -32,3 +32,8 @@ body {
 .btn-primary-2 {
   background-color: #292929 !important;
 }
+
+.checkbox:checked,
+.checkbox[aria-checked="true"] {
+  background-color: transparent !important;
+}

@@ -1,3 +1,5 @@
+import { ApartmentType, Project, Area } from "../lib/api";
+
 // Define the translation function type directly, as next-intl does not export TFunction
 type TFunction = (key: string) => string;
 
@@ -9,7 +11,19 @@ export type NavItem = {
   subItems?: SubItem[];
 };
 
-export function getNavItems(t: TFunction): NavItem[] {
+export function getNavItems(
+  t: TFunction,
+  areas: Area[] = [],
+  projects: Project[] = [],
+  apartmentTypes: ApartmentType[] = []
+): NavItem[] {
+  // Ensure all parameters are arrays
+  const safeAreas = Array.isArray(areas) ? areas : [];
+  const safeProjects = Array.isArray(projects) ? projects : [];
+  const safeApartmentTypes = Array.isArray(apartmentTypes)
+    ? apartmentTypes
+    : [];
+
   return [
     { name: t("home"), href: "/" },
     { name: t("about"), href: "/about" },
@@ -18,28 +32,24 @@ export function getNavItems(t: TFunction): NavItem[] {
       subItems: [
         {
           name: t("subMenuHeading.area"),
-          subMenuItem: [
-            { name: "Thành phố Hồ Chí Minh", href: "/products" },
-            { name: "Bình Dương", href: "/" },
-            { name: "Đà Nẵng", href: "/" },
-          ],
+          subMenuItem: safeAreas.map((area) => ({
+            name: area.name,
+            href: `/products?area=${area.name}`,
+          })),
         },
         {
           name: t("subMenuHeading.products"),
-          subMenuItem: [
-            { name: "Vinhome city", href: "/" },
-            { name: "The sóng", href: "/" },
-            { name: "Celadon city", href: "/" },
-          ],
+          subMenuItem: safeProjects.map((project) => ({
+            name: project.name,
+            href: `/products?project=${project.name}`,
+          })),
         },
         {
           name: t("subMenuHeading.typeOfApartments"),
-          subMenuItem: [
-            { name: "Căn hộ chung cư", href: "/" },
-            { name: "Duplex", href: "/" },
-            { name: "Nhà mặt tiền", href: "/" },
-            { name: "Nhà Phố", href: "/" },
-          ],
+          subMenuItem: safeApartmentTypes.map((type) => ({
+            name: type.name,
+            href: `/products?apartmentType=${type.name}`,
+          })),
         },
       ],
     },

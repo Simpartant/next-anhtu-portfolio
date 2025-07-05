@@ -3,7 +3,7 @@
 
 declare const messages: {
   "IndexPage": {
-    "title": "next-intl example"
+    "title": "Nguyễn Anh Tú Investment Consultant"
   },
   "NotFoundPage": {
     "description": "Please double-check the browser address bar or use the navigation to go to a known page.",
@@ -40,12 +40,25 @@ declare const messages: {
   "BlogPage": {
     "title": "BLOGS",
     "seeAllBlogs": "See all blogs",
-    "dateCreated": "Date Created"
+    "dateCreated": "Date Created",
+    "searchBlogByTitle": "Search blog by title",
+    "noBlogFound": "No blogs found matching your search.",
+    "noBlogAvailable": "No blogs available."
   },
   "ProductPage": {
     "title": "PRODUCTS",
     "seeAllProducts": "See all products",
-    "productDetails": "Product Details"
+    "productDetails": "Product Details",
+    "noProductFound": "No products found",
+    "filter": {
+      "investor": "Investor",
+      "project": "Project",
+      "area": "Area",
+      "typeOfApartment": "Type of Apartment",
+      "all": "All",
+      "allProjects": "All Projects",
+      "clearAllFilters": "Clear All Filters"
+    }
   },
   "ActionComponent": {
     "action": "Contact Now",
@@ -81,6 +94,10 @@ declare const messages: {
     "about1": "According to Nguyễn Anh Tú, a real estate investment consultant is not merely someone who introduces products, but someone who conveys the spirit and long-term vision behind every deal. An ideal property is not just about location or financial value—it reflects the lifestyle, personality, and aspirations of its owner. Choosing the right space to live or invest in is the first step toward building a prosperous and sustainable life—a place we don’t just ‘stay’ in, but truly call ‘home’.",
     "about2": "With a human-centered philosophy, Nguyễn Anh Tú always places the desires, feelings, and financial goals of each client at the heart of every consulting decision. Each product he introduces is not simply a piece of real estate—it is a part of a long-term strategy, personalized to reflect the lifestyle, aesthetics, and unique objectives of every client.",
     "about3": "Working with both passion and refined intuition, Nguyễn Anh Tú consistently strives to connect clients with assets that carry a personal imprint—opening the door to a world of living and investing that is not only effective but also emotionally fulfilling."
+  },
+  "Discover": {
+    "title": "OUR TEAM",
+    "description": "We are a group of innovate, experience, and proficient teams. You will love to collaborate with us."
   }
 };
 export default messages;

@@ -68,15 +68,31 @@ export async function GET(req: NextRequest) {
 
     const { searchParams } = new URL(req.url);
     const type = searchParams.get("type");
-    const area = searchParams.get("area");
-    const investor = searchParams.get("investor");
+    const areas = searchParams.getAll("area"); // Lấy tất cả area params
+    const investors = searchParams.getAll("investor"); // Lấy tất cả investor params
     const apartmentType = searchParams.get("apartmentType");
+    const project = searchParams.get("project"); // Thêm project filter
 
-    const filter: Record<string, string> = {};
+    const filter: Record<string, unknown> = {};
     if (type) filter.type = type;
-    if (area) filter.area = area;
-    if (investor) filter.investor = investor;
+    if (areas.length > 0) {
+      if (areas.length === 1) {
+        filter.area = areas[0];
+      } else {
+        // Nếu có nhiều hơn 1 area, sử dụng $in operator
+        filter.area = { $in: areas };
+      }
+    }
+    if (investors.length > 0) {
+      if (investors.length === 1) {
+        filter.investor = investors[0];
+      } else {
+        // Nếu có nhiều hơn 1 investor, sử dụng $in operator
+        filter.investor = { $in: investors };
+      }
+    }
     if (apartmentType) filter.apartmentType = apartmentType;
+    if (project) filter.name = project; // Filter theo name field
 
     const products = await Product.find(filter).sort({ createdAt: -1 });
 

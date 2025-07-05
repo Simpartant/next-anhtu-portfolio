@@ -8,7 +8,15 @@ import Link from "next/link";
 import { useTranslations } from "next-intl";
 import SwitchLocale from "./SwitchLocale";
 import { getNavItems, NavItem } from "../constants/navItems";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import {
+  fetchApartmentTypes,
+  fetchProjects,
+  fetchAreas,
+  ApartmentType,
+  Project,
+  Area,
+} from "../lib/api";
 
 type SubMenuItem = { name: string; href: string };
 type SubItem = { name: string; subMenuItem: SubMenuItem[] };
@@ -188,7 +196,44 @@ function DesktopMenu({ navItems }: { navItems: NavItem[] }) {
 
 export default function Navigation() {
   const t = useTranslations("Navigation");
-  const navItems: NavItem[] = getNavItems(t);
+  const [areas, setAreas] = useState<Area[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [apartmentTypes, setApartmentTypes] = useState<ApartmentType[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const [areasData, projectsData, apartmentTypesData] = await Promise.all(
+          [fetchAreas(), fetchProjects(), fetchApartmentTypes()]
+        );
+        setAreas(areasData);
+        setProjects(projectsData);
+        setApartmentTypes(apartmentTypesData);
+      } catch (error) {
+        console.error("Error fetching navigation data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const navItems: NavItem[] = getNavItems(t, areas, projects, apartmentTypes);
+  if (loading) {
+    return (
+      <div className="flex w-full flex-col z-50">
+        <SwitchLocale />
+        <div className="divider bg-neutral m-0"></div>
+        <div className="navbar bg-neutral shadow-sm py-5">
+          <div className="container mx-auto flex flex-row items-center justify-center">
+            <div className="loading loading-spinner loading-md"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex w-full flex-col z-50">
