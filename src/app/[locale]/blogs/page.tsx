@@ -5,8 +5,8 @@ import BlogCard from "@/components/Blogs/BlogCard";
 import { useTranslations } from "next-intl";
 
 interface Blog {
+  _id: string;
   title: string;
-  slug: string;
   image: string;
   description: string;
   createdAt: string;
@@ -118,9 +118,9 @@ export default function BlogsPage() {
         {filteredBlogs.length > 0 ? (
           filteredBlogs.map((blog) => (
             <BlogCard
-              key={blog.slug}
+              key={blog._id}
+              id={blog._id}
               title={blog.title}
-              slug={blog.slug}
               imageUrl={blog.image}
               description={blog.description}
               createdAt={blog.createdAt}
