@@ -144,14 +144,6 @@ function ProductsPageContent() {
 
     // Update URL without reload
     updateURL(params);
-
-    // Fetch products immediately with new filters
-    fetchProducts(
-      selectedType || undefined,
-      newSelectedAreas,
-      selectedInvestors,
-      selectedProject || undefined
-    );
   };
 
   const handleInvestorChange = (investor: string, checked: boolean) => {
@@ -186,14 +178,6 @@ function ProductsPageContent() {
 
     // Update URL without reload
     updateURL(params);
-
-    // Fetch products immediately with new filters
-    fetchProducts(
-      selectedType || undefined,
-      selectedAreas,
-      newSelectedInvestors,
-      selectedProject || undefined
-    );
   };
 
   const handleProjectChange = (project: string | null) => {
@@ -221,14 +205,6 @@ function ProductsPageContent() {
 
     // Update URL without reload
     updateURL(params);
-
-    // Fetch products immediately with new filters
-    fetchProducts(
-      selectedType || undefined,
-      selectedAreas,
-      selectedInvestors,
-      project || undefined
-    );
   };
 
   const handleApartmentTypeChange = (type: string | null) => {
@@ -256,14 +232,6 @@ function ProductsPageContent() {
 
     // Update URL without reload
     updateURL(params);
-
-    // Fetch products immediately with new filters
-    fetchProducts(
-      type || undefined,
-      selectedAreas,
-      selectedInvestors,
-      selectedProject || undefined
-    );
   };
 
   useEffect(() => {
@@ -329,7 +297,8 @@ function ProductsPageContent() {
     };
 
     initialize();
-  }, []); // Remove searchParams dependency to prevent infinite loop
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Separate useEffect for URL changes
   useEffect(() => {
@@ -664,7 +633,7 @@ function ProductsPageContent() {
 
   if (loading) {
     return (
-      <div className="container mx-auto py-20">
+      <div className="container mx-auto py-20 px-6 lg:px-0">
         <div className="text-4xl mb-16">{t("title")}</div>
         <div className="flex justify-center items-center h-64">
           <div className="loading loading-spinner loading-lg"></div>
@@ -675,7 +644,7 @@ function ProductsPageContent() {
 
   if (error) {
     return (
-      <div className="container mx-auto py-20 ">
+      <div className="container mx-auto py-20 px-6 lg:px-0">
         <div className="text-4xl mb-16">{t("title")}</div>
         <div className="alert alert-error">
           <span>Error: {error}</span>
@@ -738,11 +707,10 @@ function ProductsPageContent() {
           {apartmentTypes.length > 0 && (
             <div className="mb-8 flex flex-wrap gap-2">
               <button
-                className={`btn btn-primary-2 rounded-xl ${
-                  selectedType === null
-                    ? "font-bold border-2 border-gray-600"
-                    : "font-normal"
-                }`}
+                className={`btn btn-primary-2 text-white border-none
+ rounded-xl ${
+   selectedType === null ? "font-bold border-2 border-gray-600" : "font-normal"
+ }`}
                 onClick={() => handleApartmentTypeChange(null)}
               >
                 {t("filter.all")}
@@ -750,11 +718,10 @@ function ProductsPageContent() {
               {apartmentTypes.map((type) => (
                 <button
                   key={type}
-                  className={`btn btn-primary-2 rounded-xl ${
-                    selectedType === type
-                      ? "font-bold border-2 border-gray-600"
-                      : "font-normal"
-                  }`}
+                  className={`btn btn-primary-2 text-white border-none
+ rounded-xl ${
+   selectedType === type ? "font-bold border-2 border-gray-600" : "font-normal"
+ }`}
                   onClick={() => handleApartmentTypeChange(type)}
                 >
                   {type}
@@ -766,7 +733,7 @@ function ProductsPageContent() {
           {/* Products Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {products.map((product) => (
-              <ProductCard key={product.slug} {...product} />
+              <ProductCard key={product.name} {...product} />
             ))}
           </div>
 

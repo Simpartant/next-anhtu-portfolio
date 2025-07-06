@@ -6,7 +6,6 @@ const BlogSchema = new Schema(
     content: String,
     image: String,
     description: String,
-    slug: { type: String, unique: true },
     createdAt: { type: Date, default: Date.now },
   },
   { timestamps: true }

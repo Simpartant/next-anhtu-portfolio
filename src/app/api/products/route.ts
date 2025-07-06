@@ -11,18 +11,29 @@ export async function POST(req: NextRequest) {
   }
   await connectDB();
 
-  const {
-    name,
-    area,
-    investor,
-    defaultImage,
-    listImages,
-    detail,
-    type,
-    apartmentType,
-    acreage,
-    slug,
-  } = await req.json();
+  const formData = await req.formData();
+
+  const name = formData.get("name") as string;
+  const area = formData.get("area") as string;
+  const investor = formData.get("investor") as string;
+  const defaultImage = formData.get("defaultImage") as string;
+  const listImagesString = formData.get("listImages") as string;
+  const detail = formData.get("detail") as string;
+  const type = formData.get("type") as string;
+  const apartmentType = formData.get("apartmentType") as string;
+  const acreage = formData.get("acreage") as string;
+
+  // Parse listImages từ string JSON
+  let listImages: string[] = [];
+  try {
+    listImages = JSON.parse(listImagesString);
+  } catch (error) {
+    console.error("Error parsing listImages:", error);
+    return NextResponse.json(
+      { error: "Invalid listImages format" },
+      { status: 400 }
+    );
+  }
 
   if (
     !name ||
@@ -33,8 +44,7 @@ export async function POST(req: NextRequest) {
     !detail ||
     !type ||
     !apartmentType ||
-    !acreage ||
-    !slug
+    !acreage
   ) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
@@ -50,7 +60,6 @@ export async function POST(req: NextRequest) {
       type,
       apartmentType,
       acreage,
-      slug,
     });
     return NextResponse.json(newProduct, { status: 201 });
   } catch (err) {

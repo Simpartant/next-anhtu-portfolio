@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-enum ProjectType {
+export enum ProjectType {
   onSale = "Đang mở bán",
   booking = "Booking",
   onProgress = "Đang bàn giao",
@@ -20,7 +20,6 @@ const ProductSchema = new Schema(
     },
     apartmentType: String,
     acreage: String,
-    slug: { type: String, unique: true },
   },
   { timestamps: true }
 );

@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 interface Blog {
+  _id: string;
   title: string;
   slug: string;
   image: string;
@@ -43,9 +44,9 @@ export default function Blogs() {
       <div className="flex flex-col gap-8 lg:flex-row justify-between mt-12">
         {firstThreeBlogs.map((blog, index) => (
           <BlogCard
-            key={index}
+            key={index + blog._id}
+            id={blog._id}
             title={blog.title}
-            slug={blog.slug}
             imageUrl={blog.image}
             description={blog.description}
             createdAt={blog.createdAt}
@@ -54,7 +55,8 @@ export default function Blogs() {
       </div>
       <div className="flex justify-center mt-8">
         <button
-          className="btn btn-primary-2 rounded-xl"
+          className="btn btn-primary-2 text-white border-none
+ rounded-xl"
           onClick={() => router.push("/blogs")}
         >
           {t("seeAllBlogs")}

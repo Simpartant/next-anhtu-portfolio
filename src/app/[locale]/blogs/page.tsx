@@ -73,7 +73,7 @@ export default function BlogsPage() {
 
   if (error) {
     return (
-      <div className="container mx-auto py-20">
+      <div className="container mx-auto py-20 px-6 lg:px-0">
         <div className="text-4xl mb-16">{t("title")}</div>
         <div className="text-center text-red-500">Error: {error}</div>
       </div>

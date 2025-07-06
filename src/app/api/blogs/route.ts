@@ -11,9 +11,9 @@ export async function POST(req: NextRequest) {
   }
   await connectDB();
 
-  const { title, content, slug, image, description } = await req.json();
+  const { title, content, image, description } = await req.json();
 
-  if (!title || !content || !slug || !image || !description) {
+  if (!title || !content || !image || !description) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
@@ -21,7 +21,6 @@ export async function POST(req: NextRequest) {
     const newBlog = await Blog.create({
       title,
       content,
-      slug,
       image,
       description,
     });
@@ -37,7 +36,6 @@ export async function POST(req: NextRequest) {
 
 interface BlogFilter {
   title?: { $regex: string | null; $options: string };
-  slug?: string | null;
 }
 
 export async function GET(req: NextRequest) {
@@ -51,9 +49,6 @@ export async function GET(req: NextRequest) {
     const filter: BlogFilter = {};
     if (searchParams.has("title")) {
       filter.title = { $regex: searchParams.get("title"), $options: "i" };
-    }
-    if (searchParams.has("slug")) {
-      filter.slug = searchParams.get("slug");
     }
 
     const blogs = await Blog.find(filter).sort({ createdAt: -1 });

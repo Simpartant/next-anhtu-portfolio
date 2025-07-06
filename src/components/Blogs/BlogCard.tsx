@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface BlogCardProps {
+  id: string;
   title: string;
-  slug: string;
   imageUrl: string;
   description: string;
   createdAt: string;
@@ -21,8 +21,8 @@ function formatDate(dateString: string) {
 }
 
 export default function BlogCard({
+  id,
   title,
-  slug,
   imageUrl,
   description,
   createdAt,
@@ -30,8 +30,8 @@ export default function BlogCard({
   const t = useTranslations("BlogPage");
 
   return (
-    <Link href={`/blogs/${slug}`} className="block">
-      <div className="bg-primary-2 w-full max-w-[100%] lg:max-w-lg xl:max-w-xl shadow-sm hover:shadow-lg transition rounded-[30px] rounded-t-lg flex flex-col h-full mx-auto">
+    <Link href={`/blogs/${id}`} className="block">
+      <div className="bg-primary-2 lg:max-w-lg shadow-sm hover:shadow-lg transition rounded-[30px] rounded-t-lg flex flex-col h-full mx-auto">
         <figure>
           <Image
             src={imageUrl}
@@ -39,7 +39,7 @@ export default function BlogCard({
             width={400}
             height={250}
             draggable={false}
-            className="w-full h-[180px] sm:h-[200px] md:h-[220px] lg:h-[250px] object-cover"
+            className="lg:w-[32rem] md:w-full sm:h-[200px] md:h-[220px] lg:h-[250px] object-cover"
           />
         </figure>
         <div className="p-4 sm:p-6 flex flex-col gap-3 sm:gap-4 flex-1">

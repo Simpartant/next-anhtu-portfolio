@@ -256,7 +256,9 @@ export default function Navigation() {
                   />
                 </div>
                 <div className="lg:hidden">
-                  <Image src={LogoOnly} className="w-10" alt="Logo only" />
+                  <Link href="/">
+                    <Image src={LogoOnly} className="w-10" alt="Logo only" />
+                  </Link>
                 </div>
               </div>
               <MobileMenu navItems={navItems} />

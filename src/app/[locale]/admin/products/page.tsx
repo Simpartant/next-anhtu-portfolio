@@ -4,48 +4,56 @@ import PageLayout from "@/components/Admin/PageLayout";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-interface Blog {
+interface Product {
   _id: string;
-  title: string;
-  description: string;
-  slug: string;
+  name: string;
+  area: string;
+  investor: string;
 }
 
-export default function BlogsAdminPage() {
-  const [blogs, setBlogs] = useState<Blog[]>([]);
+export default function ProductsAdminPage() {
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
-  const [blogToDelete, setBlogToDelete] = useState<Blog | null>(null);
+  const [productToDelete, setProductToDelete] = useState<Product | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const fetchBlogs = async () => {
+    const fetchProducts = async () => {
       try {
-        const res = await fetch("/api/blogs", { credentials: "include" });
+        const res = await fetch("/api/products", {
+          credentials: "include",
+        });
         const data = await res.json();
-        setBlogs(data);
+        setProducts(data);
       } catch (error) {
-        console.error("Failed to fetch blogs", error);
+        console.error("Failed to fetch products", error);
       } finally {
         setLoading(false);
       }
     };
-    fetchBlogs();
+
+    fetchProducts();
   }, []);
 
-  const handleDeleteClick = (blog: Blog) => setBlogToDelete(blog);
+  const handleDeleteClick = (product: Product) => {
+    setProductToDelete(product);
+  };
 
   const handleConfirmDelete = async () => {
-    if (!blogToDelete) return;
+    if (!productToDelete) return;
+
     setIsDeleting(true);
     try {
-      const res = await fetch(`/api/blogs/${blogToDelete._id}`, {
+      const res = await fetch(`/api/products/${productToDelete._id}`, {
         method: "DELETE",
         credentials: "include",
       });
       if (res.ok) {
-        setBlogs(blogs.filter((b) => b._id !== blogToDelete._id));
-        setBlogToDelete(null);
+        setProducts(products.filter((p) => p._id !== productToDelete._id));
+        setProductToDelete(null);
+      } else {
+        console.error("Delete failed");
       }
     } catch (error) {
       console.error("Delete error", error);
@@ -54,33 +62,42 @@ export default function BlogsAdminPage() {
     }
   };
 
-  const handleCancelDelete = () => setBlogToDelete(null);
+  const handleCancelDelete = () => {
+    setProductToDelete(null);
+  };
 
-  const filteredBlogs = blogs.filter(
-    (blog) =>
-      blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      blog.slug.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filter products based on search term
+  const filteredProducts = products.filter(
+    (product) =>
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.area.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.investor.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <PageLayout>
       <div className="container">
-        <h1 className="text-2xl font-bold mb-4">Blogs Admin Page</h1>
+        <h1 className="text-2xl font-bold mb-4">Products Admin Page</h1>
+
         <div className="mb-4 flex justify-between items-center gap-4">
-          <input
-            type="text"
-            placeholder="Search by title or slug..."
-            className="input input-bordered w-full max-w-md"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
+          <div className="max-w-md">
+            <input
+              type="text"
+              placeholder="Search by name, area, or investor..."
+              className="input input-bordered w-full"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+
           <Link
-            href="/admin/blogs/create-blog"
+            href="/admin/products/create-product"
             className="btn btn-primary-2 text-white border-none"
           >
-            Create Blog
+            Create Product
           </Link>
         </div>
+
         {loading ? (
           <div className="text-center">Loading...</div>
         ) : (
@@ -88,28 +105,28 @@ export default function BlogsAdminPage() {
             <table className="table table-zebra w-full">
               <thead>
                 <tr>
-                  <th>Title</th>
-                  <th>Description</th>
-                  <th>Slug</th>
+                  <th>Name</th>
+                  <th>Area</th>
+                  <th>Investor</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {filteredBlogs.map((blog) => (
-                  <tr key={blog._id}>
-                    <td>{blog.title}</td>
-                    <td>{blog.description}</td>
-                    <td>{blog.slug}</td>
+                {filteredProducts.map((product) => (
+                  <tr key={product._id}>
+                    <td>{product.name}</td>
+                    <td>{product.area}</td>
+                    <td>{product.investor}</td>
                     <td>
                       <div className="flex gap-2">
                         <Link
-                          href={`/admin/blogs/${blog._id}`}
+                          href={`/admin/products/${product._id}`}
                           className="btn btn-sm btn-info"
                         >
                           Edit
                         </Link>
                         <button
-                          onClick={() => handleDeleteClick(blog)}
+                          onClick={() => handleDeleteClick(product)}
                           className="btn btn-sm btn-error"
                         >
                           Delete
@@ -120,23 +137,25 @@ export default function BlogsAdminPage() {
                 ))}
               </tbody>
             </table>
-            {filteredBlogs.length === 0 && !loading && (
+
+            {filteredProducts.length === 0 && !loading && (
               <div className="text-center py-4 text-gray-500">
                 {searchTerm
-                  ? "No blogs found matching your search."
-                  : "No blogs available."}
+                  ? "No products found matching your search."
+                  : "No products available."}
               </div>
             )}
           </div>
         )}
+
         {/* Delete Confirmation Modal */}
-        {blogToDelete && (
+        {productToDelete && (
           <div className="modal modal-open">
             <div className="modal-box">
               <h3 className="font-bold text-lg">Confirm Delete</h3>
               <p className="py-4">
-                Are you sure you want to delete the blog &quot;
-                {blogToDelete.title}&quot;? This action cannot be undone.
+                Are you sure you want to delete the product &quot;
+                {productToDelete.name}&quot;? This action cannot be undone.
               </p>
               <div className="modal-action">
                 <button
