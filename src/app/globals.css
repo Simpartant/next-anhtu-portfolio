@@ -33,6 +33,10 @@ body {
   background-color: #292929 !important;
 }
 
+.divider {
+  --divider-color: #292929 !important;
+}
+
 .checkbox:checked,
 .checkbox[aria-checked="true"] {
   background-color: transparent !important;
