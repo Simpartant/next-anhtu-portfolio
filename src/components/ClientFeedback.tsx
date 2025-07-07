@@ -61,7 +61,7 @@ export default function ClientFeedback() {
   };
 
   return (
-    <section className="text-white py-12 px-6 lg:px-0">
+    <section className="text-white py-12 px-6 xl:px-0">
       <div>
         <h2 className="text-4xl mb-12">{t("title")}</h2>
         <div className="rounded-4xl bg-primary-2 border border-neutral-600 p-4 md:p-8 flex flex-col items-center justify-between gap-4 relative">

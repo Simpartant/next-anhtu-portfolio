@@ -7,7 +7,7 @@ import Group5 from "@/assets/Group/Group 5.svg";
 
 export default function ListLogo() {
   return (
-    <div className="flex flex-wrap md:flex-nowrap justify-between items-center py-4 max-sm:px-6 md:py-20">
+    <div className="flex flex-wrap md:flex-nowrap justify-between items-center py-4 px-6 xl:px-0 md:py-20">
       <Image
         src={Group1}
         alt="capital"

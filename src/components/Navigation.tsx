@@ -264,7 +264,11 @@ export default function Navigation() {
               <MobileMenu navItems={navItems} />
             </div>
             <Link className="max-lg:hidden" href="/">
-              <Image src={FullLogo} alt="full logo" />
+              <Image
+                src={FullLogo}
+                className="lg:w-[15rem] xl:w-full"
+                alt="full logo"
+              />
             </Link>
           </div>
           <div className="navbar-center hidden lg:flex">

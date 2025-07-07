@@ -182,6 +182,7 @@ export default function BlogDetailPage() {
             />
             {/* Hiển thị ảnh cũ nếu có */}
             {blog.image && !imageFile && (
+              // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={blog.image}
                 alt="Preview"
@@ -190,6 +191,7 @@ export default function BlogDetailPage() {
             )}
             {/* Hiển thị ảnh mới nếu vừa chọn */}
             {imageFile && (
+              // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={URL.createObjectURL(imageFile)}
                 alt="Preview"

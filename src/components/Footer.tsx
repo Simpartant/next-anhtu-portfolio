@@ -41,7 +41,11 @@ export default function Footer() {
           <aside>
             <div className="flex flex-col gap-4">
               <Image src={LogoOnly} alt="Logo only" />
-              <Image src={TextLogo} alt="Text Logo" />
+              <Image
+                src={TextLogo}
+                className="md:w-[15rem] xl:w-full"
+                alt="Text Logo"
+              />
             </div>
             <SocialLinks />
           </aside>

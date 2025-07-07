@@ -39,7 +39,7 @@ export default function Blogs() {
   }, []);
 
   return (
-    <div className="py-4 max-sm:px-6 md:py-20">
+    <div className="py-4 px-6 xl:px-0 md:py-20">
       <div className="text-3xl">{t("title")}</div>
       <div className="flex flex-col gap-8 lg:flex-row justify-between mt-12">
         {firstThreeBlogs.map((blog, index) => (

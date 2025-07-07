@@ -27,7 +27,7 @@ export default function SwitchLocale() {
 
   return (
     <div className="bg-neutral">
-      <div className="container mx-auto pt-5 pb-3 font-bold text-sm">
+      <div className="container mx-auto px-6 xl:px-0 pt-5 pb-3 font-bold text-sm">
         <div className="flex flex-row justify-between items-center max-sm:flex-col max-sm:items-center max-sm:gap-5">
           <div>{t("position")}</div>
           <div className="flex flex-row">

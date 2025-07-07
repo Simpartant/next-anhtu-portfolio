@@ -49,7 +49,7 @@ export default function AboutPage() {
       </section>
 
       {/* Middle Section with team image and quote */}
-      <section className="mx-auto py-20 space-y-6 flex flex-col lg:flex-row lg:gap-20 gap-10 items-center">
+      <section className="mx-auto py-20 space-y-6 flex flex-col xl:flex-row lg:gap-20 gap-10 items-center">
         <Image
           src={About02}
           priority
@@ -57,7 +57,7 @@ export default function AboutPage() {
           alt="Three professionally dressed men engaged in a friendly lively conversation outside an office building"
           className="object-obtain w-[80rem] "
         />
-        <div className="flex flex-col max-sm:px-6 gap-10">
+        <div className="flex flex-col px-6 lg:px-0 gap-10">
           <blockquote className="text-white text-lg italic border-l-4 border-white pl-6 max-w-4xl mx-auto">
             {t("saySentence01")}
           </blockquote>
@@ -81,7 +81,7 @@ export default function AboutPage() {
       />
 
       {/* Bottom Section with two images and text */}
-      <section className="container mx-auto max-sm:px-6 py-20 space-y-10 flex flex-col lg:flex-row lg:gap-20 lg:justify-between gap-10 items-center">
+      <section className="container mx-auto px-6 xl:px-0 py-20 space-y-10 flex flex-col lg:flex-row lg:gap-20 lg:justify-between gap-10 items-center">
         <div className="flex flex-col gap-8">
           <div className="text-3xl/12 max-w-2xl font-bold">
             {t("aboutTitle")}

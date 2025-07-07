@@ -9,6 +9,12 @@ export default function AdminLoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [showReset, setShowReset] = useState(false);
+  const [phone, setPhone] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [resetError, setResetError] = useState("");
+  const [resetSuccess, setResetSuccess] = useState("");
+  const [phoneChecked, setPhoneChecked] = useState(false);
 
   const handleLogin = async () => {
     const res = await fetch(`/api/auth/login`, {
@@ -21,6 +27,38 @@ export default function AdminLoginPage() {
       router.push(`/${locale}/admin/dashboard/`);
     } else {
       setError("Invalid credentials");
+    }
+  };
+
+  const handleReset = async () => {
+    setResetError("");
+    setResetSuccess("");
+    const res = await fetch(`/api/auth/reset-password`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ phone, newPassword }),
+    });
+    if (res.ok) {
+      setResetSuccess("Password reset successfully!");
+      setShowReset(false);
+    } else {
+      setResetError("Invalid phone number");
+    }
+  };
+
+  const handleCheckPhone = async () => {
+    setResetError("");
+    setResetSuccess("");
+    // Gửi request kiểm tra số điện thoại
+    const res = await fetch(`/api/auth/check-phone`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ phone }),
+    });
+    if (res.ok) {
+      setPhoneChecked(true);
+    } else {
+      setResetError("Số điện thoại không đúng");
     }
   };
 
@@ -78,6 +116,11 @@ export default function AdminLoginPage() {
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
               title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleLogin();
+                }
+              }}
             />
           </label>
           {/* <p className="validator-hint hidden">
@@ -95,6 +138,82 @@ export default function AdminLoginPage() {
             Login
           </button>
           {error && <p style={{ color: "red" }}>{error}</p>}
+          <button
+            onClick={() => setShowReset(true)}
+            className="text-blue-500 underline mt-2 cursor-pointer hover:text-blue-700"
+            type="button"
+          >
+            Quên mật khẩu?
+          </button>
+          {showReset && (
+            <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
+              <div className="bg-primary-2 p-6 rounded shadow flex flex-col gap-3">
+                <h2 className="font-bold text-lg">Đặt lại mật khẩu</h2>
+                {!phoneChecked ? (
+                  <>
+                    <input
+                      type="text"
+                      placeholder="Số điện thoại"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className="input input-bordered"
+                    />
+                    <div className="flex gap-2">
+                      <button
+                        onClick={handleCheckPhone}
+                        className="btn btn-neutral"
+                        type="button"
+                      >
+                        Kiểm tra số điện thoại
+                      </button>
+                      <button
+                        onClick={() => setShowReset(false)}
+                        className="btn"
+                        type="button"
+                      >
+                        Hủy
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <input
+                      type="password"
+                      placeholder="Mật khẩu mới"
+                      value={newPassword}
+                      onChange={(e) => setNewPassword(e.target.value)}
+                      className="input input-bordered"
+                    />
+                    <div className="flex gap-2">
+                      <button
+                        onClick={handleReset}
+                        className="btn btn-neutral"
+                        type="button"
+                      >
+                        Đổi mật khẩu
+                      </button>
+                      <button
+                        onClick={() => {
+                          setShowReset(false);
+                          setPhoneChecked(false);
+                          setPhone("");
+                          setNewPassword("");
+                        }}
+                        className="btn"
+                        type="button"
+                      >
+                        Hủy
+                      </button>
+                    </div>
+                  </>
+                )}
+                {resetError && <p className="text-red-500">{resetError}</p>}
+                {resetSuccess && (
+                  <p className="text-green-500">{resetSuccess}</p>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -18,6 +18,10 @@ export default function ProductsAdminPage() {
   const [productToDelete, setProductToDelete] = useState<Product | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 10;
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -74,6 +78,18 @@ export default function ProductsAdminPage() {
       product.investor.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Pagination logic
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * productsPerPage,
+    currentPage * productsPerPage
+  );
+
+  // Reset to page 1 when search term changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
+
   return (
     <PageLayout>
       <div className="container">
@@ -112,8 +128,11 @@ export default function ProductsAdminPage() {
                 </tr>
               </thead>
               <tbody>
-                {filteredProducts.map((product) => (
-                  <tr className="hover:bg-gray-700 border-b-gray-700" key={product._id}>
+                {paginatedProducts.map((product) => (
+                  <tr
+                    className="hover:bg-gray-700 border-b-gray-700"
+                    key={product._id}
+                  >
                     <td>{product.name}</td>
                     <td>{product.area}</td>
                     <td>{product.investor}</td>
@@ -143,6 +162,41 @@ export default function ProductsAdminPage() {
                 {searchTerm
                   ? "No products found matching your search."
                   : "No products available."}
+              </div>
+            )}
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex justify-center mt-6">
+                <div className="join">
+                  <button
+                    className="join-item btn"
+                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                    disabled={currentPage === 1}
+                  >
+                    «
+                  </button>
+                  {Array.from({ length: totalPages }, (_, i) => (
+                    <button
+                      key={i + 1}
+                      className={`join-item btn ${
+                        currentPage === i + 1 ? "btn-active" : ""
+                      }`}
+                      onClick={() => setCurrentPage(i + 1)}
+                    >
+                      {i + 1}
+                    </button>
+                  ))}
+                  <button
+                    className="join-item btn"
+                    onClick={() =>
+                      setCurrentPage((p) => Math.min(totalPages, p + 1))
+                    }
+                    disabled={currentPage === totalPages}
+                  >
+                    »
+                  </button>
+                </div>
               </div>
             )}
           </div>

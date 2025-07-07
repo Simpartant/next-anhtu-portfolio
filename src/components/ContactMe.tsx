@@ -90,7 +90,7 @@ export default function ContactMe() {
   };
 
   return (
-    <section className="mx-6 lg:mx-auto py-10 lg:py-20">
+    <section className="lg:mx-auto py-10 lg:py-20 px-6 xl:px-0">
       <h1 className="text-4xl">{t("title")}</h1>
       <div className="flex flex-col lg:flex-row gap-20 lg:gap-45 mt-12">
         <form className="w-full lg:w-1/2" onSubmit={handleSubmit}>

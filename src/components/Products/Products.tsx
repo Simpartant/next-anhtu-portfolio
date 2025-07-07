@@ -55,14 +55,16 @@ export default function Products() {
   }, [selectedType]);
 
   return (
-    <div className="py-4 max-sm:px-6 md:py-20">
+    <div className="py-4 px-6 xl:px-0 md:py-20">
       <div className="text-3xl">{t("title")}</div>
       {apartmentTypes.length > 0 && (
         <div className="mt-12 flex flex-wrap gap-2">
           <button
             className={`btn btn-primary-2 shadow-none text-white border-none
  rounded-xl ${
-   selectedType === null ? "font-bold border-2 border-solid border-gray-600" : "font-normal"
+   selectedType === null
+     ? "font-bold border-2 border-solid border-gray-600"
+     : "font-normal"
  }`}
             onClick={() => setSelectedType(null)}
           >
@@ -73,7 +75,9 @@ export default function Products() {
               key={type}
               className={`btn btn-primary-2 shadow-none text-white border-none
  rounded-xl ${
-   selectedType === type ? "font-bold border-2 border-solid border-gray-600" : "font-normal"
+   selectedType === type
+     ? "font-bold border-2 border-solid border-gray-600"
+     : "font-normal"
  }`}
               onClick={() => setSelectedType(type)}
             >

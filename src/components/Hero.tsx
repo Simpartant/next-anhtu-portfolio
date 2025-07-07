@@ -7,7 +7,7 @@ export default function Hero() {
   const t = useTranslations("Hero");
 
   return (
-    <div className="w-full py-10 lg:py-20">
+    <div className="w-full py-10 lg:py-20 ">
       <div className="flex flex-col lg:flex-row-reverse items-center justify-between">
         <Image
           src={heroImage}

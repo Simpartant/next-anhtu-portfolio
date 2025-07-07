@@ -64,7 +64,7 @@ export default function BlogsPage() {
 
   if (loading) {
     return (
-      <div className="container mx-auto py-20">
+      <div className="container mx-auto py-10 lg:py-20 px-6 xl:px-0">
         <div className="text-4xl mb-16">{t("title")}</div>
         <div className="text-center">Loading blogs...</div>
       </div>
@@ -73,7 +73,7 @@ export default function BlogsPage() {
 
   if (error) {
     return (
-      <div className="container mx-auto py-20 px-6 lg:px-0">
+      <div className="container mx-auto py-10 lg:py-20 px-6 xl:px-0">
         <div className="text-4xl mb-16">{t("title")}</div>
         <div className="text-center text-red-500">Error: {error}</div>
       </div>
@@ -81,12 +81,12 @@ export default function BlogsPage() {
   }
 
   return (
-    <div className="container mx-auto py-20">
+    <div className="container mx-auto py-10 lg:py-20 px-6 xl:px-0">
       <div className="text-4xl mb-8">{t("title")}</div>
 
       {/* Search Input */}
-      <div className="mb-16">
-        <label className="input w-[50%] h-[4em] bg-primary-2">
+      <div className="mb-10 lg:mb-16">
+        <label className="input w-full lg:w-[50%] h-[4em] bg-primary-2">
           <svg
             className="h-[1em] opacity-50"
             xmlns="http://www.w3.org/2000/svg"

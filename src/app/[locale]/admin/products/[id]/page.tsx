@@ -543,7 +543,7 @@ export default function ProductsDetailAdminPage() {
                     menubar: false,
                     plugins: ["link", "lists", "code"],
                     toolbar:
-                      "undo redo | bold italic underline | bullist numlist | link | code",
+                      "undo redo | bold italic underline | bullist numlist | link",
                   }}
                   disabled={!isEditing || isFormDisabled}
                 />

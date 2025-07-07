@@ -55,6 +55,16 @@
       "all": "Tất cả",
       "allProjects": "Tất cả Dự án",
       "clearAllFilters": "Xóa tất cả bộ lọc"
+    },
+    "detail": {
+      "area": "Diện tích",
+      "typeOfApartment": "Loại căn hộ",
+      "time": "Thời gian",
+      "information": "Thông tin mô tả",
+      "project": "Dự án",
+      "in": "ở",
+      "home": "TRANG CHỦ",
+      "products": "SẢN PHẨM"
     }
   },
   "ActionComponent": {

@@ -124,7 +124,9 @@ function ProductsPageContent() {
     if (selectedType) {
       params.set("apartmentType", selectedType);
     }
-    selectedInvestors.forEach((investor) => params.append("investor", investor));
+    selectedInvestors.forEach((investor) =>
+      params.append("investor", investor)
+    );
     if (selectedProject) {
       params.set("project", selectedProject);
     }
@@ -162,7 +164,9 @@ function ProductsPageContent() {
       params.set("apartmentType", selectedType);
     }
     selectedAreas.forEach((area) => params.append("area", area));
-    selectedInvestors.forEach((investor) => params.append("investor", investor));
+    selectedInvestors.forEach((investor) =>
+      params.append("investor", investor)
+    );
     updateURL(params);
   };
 
@@ -173,7 +177,9 @@ function ProductsPageContent() {
       params.set("apartmentType", type);
     }
     selectedAreas.forEach((area) => params.append("area", area));
-    selectedInvestors.forEach((investor) => params.append("investor", investor));
+    selectedInvestors.forEach((investor) =>
+      params.append("investor", investor)
+    );
     if (selectedProject) {
       params.set("project", selectedProject);
     }
@@ -256,7 +262,13 @@ function ProductsPageContent() {
         selectedProject || undefined
       );
     }
-  }, [selectedType, selectedAreas, selectedInvestors, selectedProject, filtersInitialized]);
+  }, [
+    selectedType,
+    selectedAreas,
+    selectedInvestors,
+    selectedProject,
+    filtersInitialized,
+  ]);
 
   const AreaFilter = () => (
     <div>
@@ -574,7 +586,7 @@ function ProductsPageContent() {
   }
 
   return (
-    <div className="container mx-auto py-20 px-6 lg:px-0">
+    <div className="container mx-auto py-10 lg:py-20 px-6 lg:px-0">
       <div className="text-4xl mb-16">{t("title")}</div>
 
       {/* Clear Filters Button */}
@@ -629,7 +641,9 @@ function ProductsPageContent() {
               <button
                 className={`btn btn-primary-2 text-white border-none shadow-none
  rounded-xl ${
-   selectedType === null ? "font-bold border-2 border-solid border-gray-600" : "font-normal"
+   selectedType === null
+     ? "font-bold border-2 border-solid border-gray-600"
+     : "font-normal"
  }`}
                 onClick={() => handleApartmentTypeChange(null)}
               >
@@ -640,7 +654,9 @@ function ProductsPageContent() {
                   key={type}
                   className={`btn btn-primary-2 text-white border-none shadow-none
  rounded-xl ${
-   selectedType === type ? "font-bold border-2 border-solid border-gray-600" : "font-normal"
+   selectedType === type
+     ? "font-bold border-2 border-solid border-gray-600"
+     : "font-normal"
  }`}
                   onClick={() => handleApartmentTypeChange(type)}
                 >

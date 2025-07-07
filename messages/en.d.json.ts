@@ -58,6 +58,16 @@ declare const messages: {
       "all": "All",
       "allProjects": "All Projects",
       "clearAllFilters": "Clear All Filters"
+    },
+    "detail": {
+      "area": "Area",
+      "typeOfApartment": "Type of Apartment",
+      "time": "Time",
+      "information": "Information",
+      "project": "Project",
+      "in": "in",
+      "home": "HOME",
+      "products": "PRODUCTS"
     }
   },
   "ActionComponent": {
