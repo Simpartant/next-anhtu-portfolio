@@ -60,9 +60,9 @@ export default function Products() {
       {apartmentTypes.length > 0 && (
         <div className="mt-12 flex flex-wrap gap-2">
           <button
-            className={`btn btn-primary-2 text-white border-none
+            className={`btn btn-primary-2 shadow-none text-white border-none
  rounded-xl ${
-   selectedType === null ? "font-bold border-2 border-gray-600" : "font-normal"
+   selectedType === null ? "font-bold border-2 border-solid border-gray-600" : "font-normal"
  }`}
             onClick={() => setSelectedType(null)}
           >
@@ -71,9 +71,9 @@ export default function Products() {
           {apartmentTypes.map((type) => (
             <button
               key={type}
-              className={`btn btn-primary-2 text-white border-none
+              className={`btn btn-primary-2 shadow-none text-white border-none
  rounded-xl ${
-   selectedType === type ? "font-bold border-2 border-gray-600" : "font-normal"
+   selectedType === type ? "font-bold border-2 border-solid border-gray-600" : "font-normal"
  }`}
               onClick={() => setSelectedType(type)}
             >
@@ -88,7 +88,7 @@ export default function Products() {
         ))}
         <div className="flex items-center justify-center">
           <button
-            className="btn btn-primary-2 text-white border-none
+            className="btn btn-primary-2 shadow-none text-white border-none
  rounded-xl"
             onClick={() => router.push("/products")}
           >

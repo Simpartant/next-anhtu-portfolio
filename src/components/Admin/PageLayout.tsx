@@ -8,10 +8,10 @@ type Props = {
 export default function PageLayout({ children }: Props) {
   return (
     <div className="flex min-h-screen bg-base-100">
-      <aside className="min-w-[200px] p-4 bg-base-200">
+      <aside className="min-w-[200px] p-4 bg-neutral">
         <SideMenu />
       </aside>
-      <main className="flex-1 p-6">{children}</main>
+      <main className="flex-1 bg-primary-2 p-6">{children}</main>
     </div>
   );
 }

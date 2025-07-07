@@ -84,7 +84,7 @@ export default function ProductsAdminPage() {
             <input
               type="text"
               placeholder="Search by name, area, or investor..."
-              className="input input-bordered w-full"
+              className="input input-bordered border-gray-700 shadow-none bg-primary-2 w-[34rem]"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -92,7 +92,7 @@ export default function ProductsAdminPage() {
 
           <Link
             href="/admin/products/create-product"
-            className="btn btn-primary-2 text-white border-none"
+            className="btn btn-primary shadow-none text-black border-none"
           >
             Create Product
           </Link>
@@ -102,9 +102,9 @@ export default function ProductsAdminPage() {
           <div className="text-center">Loading...</div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="table table-zebra w-full">
+            <table className="table w-full">
               <thead>
-                <tr>
+                <tr className="text-white">
                   <th>Name</th>
                   <th>Area</th>
                   <th>Investor</th>
@@ -113,7 +113,7 @@ export default function ProductsAdminPage() {
               </thead>
               <tbody>
                 {filteredProducts.map((product) => (
-                  <tr key={product._id}>
+                  <tr className="hover:bg-gray-700 border-b-gray-700" key={product._id}>
                     <td>{product.name}</td>
                     <td>{product.area}</td>
                     <td>{product.investor}</td>

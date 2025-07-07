@@ -140,7 +140,7 @@ export default function BlogDetailPage() {
               name="title"
               value={blog.title}
               onChange={handleInputChange}
-              className="input input-bordered w-full"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
@@ -151,7 +151,7 @@ export default function BlogDetailPage() {
               name="description"
               value={blog.description}
               onChange={handleInputChange}
-              className="input input-bordered w-full"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required
             />
           </div>
@@ -178,7 +178,7 @@ export default function BlogDetailPage() {
               type="file"
               accept="image/png, image/jpeg"
               onChange={handleImageChange}
-              className="file-input file-input-bordered w-full"
+              className="file-input file-input-bordered text-black w-full"
             />
             {/* Hiển thị ảnh cũ nếu có */}
             {blog.image && !imageFile && (

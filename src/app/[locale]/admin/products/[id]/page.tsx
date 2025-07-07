@@ -430,7 +430,7 @@ export default function ProductsDetailAdminPage() {
                     <input
                       type="file"
                       accept="image/png, image/jpeg"
-                      className="file-input file-input-bordered w-full max-w-xs"
+                      className="file-input file-input-bordered text-black w-full max-w-xs"
                       onChange={handleDefaultImageFileChange}
                       disabled={
                         !!defaultImageFile ||
@@ -476,7 +476,7 @@ export default function ProductsDetailAdminPage() {
                       type="file"
                       accept="image/png, image/jpeg"
                       multiple
-                      className="file-input file-input-bordered w-full max-w-xs"
+                      className="file-input file-input-bordered text-black w-full max-w-xs"
                       onChange={handleImageFilesChange}
                       disabled={
                         imageFiles.length + product.listImages.length >= 10 ||

@@ -55,7 +55,7 @@ export default function Blogs() {
       </div>
       <div className="flex justify-center mt-8">
         <button
-          className="btn btn-primary-2 text-white border-none
+          className="btn btn-primary-2 shadow-none text-white border-none
  rounded-xl"
           onClick={() => router.push("/blogs")}
         >

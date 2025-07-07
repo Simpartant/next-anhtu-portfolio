@@ -112,125 +112,71 @@ function ProductsPageContent() {
 
   const handleAreaChange = (area: string, checked: boolean) => {
     let newSelectedAreas: string[];
-
     if (checked) {
       newSelectedAreas = [...selectedAreas, area];
     } else {
       newSelectedAreas = selectedAreas.filter((a) => a !== area);
     }
-
     setSelectedAreas(newSelectedAreas);
-
     // Update URL with new area filters
     const params = new URLSearchParams();
-
-    // Add new area params
     newSelectedAreas.forEach((a) => params.append("area", a));
-
-    // Keep apartment type if it exists
     if (selectedType) {
       params.set("apartmentType", selectedType);
     }
-
-    // Keep investors if they exist
-    selectedInvestors.forEach((investor) =>
-      params.append("investor", investor)
-    );
-
-    // Keep project if it exists
+    selectedInvestors.forEach((investor) => params.append("investor", investor));
     if (selectedProject) {
       params.set("project", selectedProject);
     }
-
-    // Update URL without reload
     updateURL(params);
   };
 
   const handleInvestorChange = (investor: string, checked: boolean) => {
     let newSelectedInvestors: string[];
-
     if (checked) {
       newSelectedInvestors = [...selectedInvestors, investor];
     } else {
       newSelectedInvestors = selectedInvestors.filter((i) => i !== investor);
     }
-
     setSelectedInvestors(newSelectedInvestors);
-
     // Update URL with new investor filters
     const params = new URLSearchParams();
-
-    // Add new investor params
     newSelectedInvestors.forEach((i) => params.append("investor", i));
-
-    // Keep apartment type if it exists
     if (selectedType) {
       params.set("apartmentType", selectedType);
     }
-
-    // Keep areas if they exist
     selectedAreas.forEach((area) => params.append("area", area));
-
-    // Keep project if it exists
     if (selectedProject) {
       params.set("project", selectedProject);
     }
-
-    // Update URL without reload
     updateURL(params);
   };
 
   const handleProjectChange = (project: string | null) => {
     setSelectedProject(project);
-
-    // Update URL with new project filter
     const params = new URLSearchParams();
-
     if (project !== null) {
       params.set("project", project);
     }
-
-    // Keep apartment type if it exists
     if (selectedType) {
       params.set("apartmentType", selectedType);
     }
-
-    // Keep area params if they exist
     selectedAreas.forEach((area) => params.append("area", area));
-
-    // Keep investor params if they exist
-    selectedInvestors.forEach((investor) =>
-      params.append("investor", investor)
-    );
-
-    // Update URL without reload
+    selectedInvestors.forEach((investor) => params.append("investor", investor));
     updateURL(params);
   };
 
   const handleApartmentTypeChange = (type: string | null) => {
     setSelectedType(type);
-
-    // Update URL with new apartment type filter
     const params = new URLSearchParams();
-
     if (type !== null) {
       params.set("apartmentType", type);
     }
-
-    // Keep area params if they exist
     selectedAreas.forEach((area) => params.append("area", area));
-
-    // Keep investor params if they exist
-    selectedInvestors.forEach((investor) =>
-      params.append("investor", investor)
-    );
-
-    // Keep project if it exists
+    selectedInvestors.forEach((investor) => params.append("investor", investor));
     if (selectedProject) {
       params.set("project", selectedProject);
     }
-
-    // Update URL without reload
     updateURL(params);
   };
 
@@ -300,43 +246,17 @@ function ProductsPageContent() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Separate useEffect for URL changes
+  // useEffect để fetch products khi filter thay đổi
   useEffect(() => {
     if (filtersInitialized) {
-      const urlAreas = searchParams.getAll("area");
-      const urlInvestors = searchParams.getAll("investor");
-      const urlApartmentType = searchParams.get("apartmentType");
-      const urlProject = searchParams.get("project");
-
-      // Only update if there are actual changes
-      const hasChanges =
-        JSON.stringify(urlAreas) !== JSON.stringify(selectedAreas) ||
-        JSON.stringify(urlInvestors) !== JSON.stringify(selectedInvestors) ||
-        urlApartmentType !== selectedType ||
-        urlProject !== selectedProject;
-
-      if (hasChanges) {
-        setSelectedAreas(urlAreas);
-        setSelectedInvestors(urlInvestors);
-        setSelectedType(urlApartmentType);
-        setSelectedProject(urlProject);
-
-        fetchProducts(
-          urlApartmentType || undefined,
-          urlAreas,
-          urlInvestors,
-          urlProject || undefined
-        );
-      }
+      fetchProducts(
+        selectedType || undefined,
+        selectedAreas,
+        selectedInvestors,
+        selectedProject || undefined
+      );
     }
-  }, [
-    searchParams,
-    filtersInitialized,
-    selectedAreas,
-    selectedInvestors,
-    selectedType,
-    selectedProject,
-  ]);
+  }, [selectedType, selectedAreas, selectedInvestors, selectedProject, filtersInitialized]);
 
   const AreaFilter = () => (
     <div>
@@ -707,9 +627,9 @@ function ProductsPageContent() {
           {apartmentTypes.length > 0 && (
             <div className="mb-8 flex flex-wrap gap-2">
               <button
-                className={`btn btn-primary-2 text-white border-none
+                className={`btn btn-primary-2 text-white border-none shadow-none
  rounded-xl ${
-   selectedType === null ? "font-bold border-2 border-gray-600" : "font-normal"
+   selectedType === null ? "font-bold border-2 border-solid border-gray-600" : "font-normal"
  }`}
                 onClick={() => handleApartmentTypeChange(null)}
               >
@@ -718,9 +638,9 @@ function ProductsPageContent() {
               {apartmentTypes.map((type) => (
                 <button
                   key={type}
-                  className={`btn btn-primary-2 text-white border-none
+                  className={`btn btn-primary-2 text-white border-none shadow-none
  rounded-xl ${
-   selectedType === type ? "font-bold border-2 border-gray-600" : "font-normal"
+   selectedType === type ? "font-bold border-2 border-solid border-gray-600" : "font-normal"
  }`}
                   onClick={() => handleApartmentTypeChange(type)}
                 >

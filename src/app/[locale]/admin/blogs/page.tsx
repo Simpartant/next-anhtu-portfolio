@@ -70,13 +70,13 @@ export default function BlogsAdminPage() {
           <input
             type="text"
             placeholder="Search by title or slug..."
-            className="input input-bordered w-full max-w-md"
+            className="input input-bordered border-gray-700 shadow-none bg-primary-2 w-[34rem] max-w-md"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <Link
             href="/admin/blogs/create-blog"
-            className="btn btn-primary-2 text-white border-none"
+            className="btn btn-primary shadow-none text-black border-none"
           >
             Create Blog
           </Link>
@@ -85,8 +85,8 @@ export default function BlogsAdminPage() {
           <div className="text-center">Loading...</div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="table table-zebra w-full">
-              <thead>
+            <table className="table w-full">
+              <thead className="text-white">
                 <tr>
                   <th>Title</th>
                   <th>Description</th>
@@ -96,7 +96,7 @@ export default function BlogsAdminPage() {
               </thead>
               <tbody>
                 {filteredBlogs.map((blog) => (
-                  <tr key={blog._id}>
+                  <tr className="hover:bg-gray-700 border-b-gray-700" key={blog._id}>
                     <td>{blog.title}</td>
                     <td>{blog.description}</td>
                     <td>{blog.slug}</td>

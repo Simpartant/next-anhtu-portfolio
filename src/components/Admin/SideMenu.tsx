@@ -33,7 +33,7 @@ export default function SideMenu() {
 
   return (
     <nav className="flex flex-col h-full">
-      <ul className="menu bg-base-200 rounded-box mb-4">
+      <ul className="menu bg-neutral rounded-box mb-4">
         <li>
           <Link href="/admin/dashboard" className="font-semibold">
             Dashboard
