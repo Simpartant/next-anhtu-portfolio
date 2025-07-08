@@ -1,5 +1,6 @@
 "use client";
 
+import { useLoading } from "@/contexts/LoadingContext";
 import { useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -44,6 +45,7 @@ export default function ClientFeedback() {
   const [index, setIndex] = useState(0);
   const t = useTranslations("ClientFeedback");
   const displayCount = useFeedbackDisplayCount();
+  const { loading } = useLoading();
 
   const prev = () => {
     setIndex((prev) => (prev === 0 ? feedbacks.length - 1 : prev - 1));
@@ -70,6 +72,7 @@ export default function ClientFeedback() {
             className="absolute left-2 md:left-6 lg:left-12 top-1/2 btn btn-circle btn-xs md:btn-sm bg-neutral-content text-neutral z-10"
             onClick={prev}
             aria-label="Previous feedback"
+            disabled={loading}
           >
             <FaChevronLeft />
           </button>
@@ -77,30 +80,48 @@ export default function ClientFeedback() {
             className="absolute right-2 md:right-6 lg:right-12 top-1/2 btn btn-circle btn-xs md:btn-sm bg-neutral-content text-neutral z-10"
             onClick={next}
             aria-label="Next feedback"
+            disabled={loading}
           >
             <FaChevronRight />
           </button>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 w-full max-w-7xl mx-auto pt-8 pb-2">
-            {getFeedbackIndices().map((current) => {
-              const f = feedbacks[current];
-              return (
-                <div
-                  key={current}
-                  className="bg-primary-2 border border-neutral-600 p-4 md:p-6 rounded-2xl shadow min-h-[180px] flex flex-col justify-between"
-                >
-                  <div className="flex items-center gap-4 mb-3">
-                    <div className="w-10 h-10 rounded-full bg-gray-300" />
-                    <div>
-                      <p className="font-semibold">{f.name}</p>
-                      <p className="text-sm text-gray-400">{f.title}</p>
+            {loading
+              ? Array.from({ length: displayCount }).map((_, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-primary-2 border border-neutral-600 p-4 md:p-6 rounded-2xl shadow min-h-[180px] flex flex-col justify-between"
+                  >
+                    <div className="flex items-center gap-4 mb-3">
+                      <div className="skeleton w-10 h-10 rounded-full" />
+                      <div>
+                        <div className="skeleton h-4 w-24 mb-2 rounded" />
+                        <div className="skeleton h-3 w-16 rounded" />
+                      </div>
                     </div>
+                    <div className="skeleton h-4 w-full rounded" />
+                    <div className="skeleton h-4 w-2/3 mt-2 rounded" />
                   </div>
-                  <p className="text-sm italic text-gray-200">
-                    &quot;{f.message}&quot;
-                  </p>
-                </div>
-              );
-            })}
+                ))
+              : getFeedbackIndices().map((current) => {
+                  const f = feedbacks[current];
+                  return (
+                    <div
+                      key={current}
+                      className="bg-primary-2 border border-neutral-600 p-4 md:p-6 rounded-2xl shadow min-h-[180px] flex flex-col justify-between"
+                    >
+                      <div className="flex items-center gap-4 mb-3">
+                        <div className="w-10 h-10 rounded-full bg-gray-300" />
+                        <div>
+                          <p className="font-semibold">{f.name}</p>
+                          <p className="text-sm text-gray-400">{f.title}</p>
+                        </div>
+                      </div>
+                      <p className="text-sm italic text-gray-200">
+                        &quot;{f.message}&quot;
+                      </p>
+                    </div>
+                  );
+                })}
           </div>
         </div>
       </div>

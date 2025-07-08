@@ -6,6 +6,7 @@ import Phone from "@/assets/icons/phone.svg";
 import EnFlag from "@/assets/icons/en-flag.svg";
 import VnFlag from "@/assets/icons/vi-flag.svg";
 import Image from "next/image";
+import { useLoading } from "@/contexts/LoadingContext";
 
 const LOCALES = [
   { code: "en", label: "EN", flag: EnFlag },
@@ -17,6 +18,7 @@ export default function SwitchLocale() {
   const router = useRouter();
   const pathname = usePathname();
   const currentLocale = pathname.split("/")[1] || "en";
+  const { loading } = useLoading();
 
   const handleChangeLocale = (locale: string) => {
     if (locale !== currentLocale) {
@@ -24,6 +26,23 @@ export default function SwitchLocale() {
       router.push(newPath);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="bg-neutral">
+        <div className="container mx-auto px-6 xl:px-0 pt-5 pb-3 font-bold text-sm">
+          <div className="flex flex-row justify-between items-center max-sm:flex-col max-sm:items-center max-sm:gap-5">
+            <div className="skeleton h-6 w-32 rounded" />
+            <div className="flex flex-row">
+              <div className="skeleton h-6 w-32 rounded mr-4" />
+              <div className="skeleton h-6 w-16 rounded mr-4" />
+              <div className="skeleton h-6 w-16 rounded" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-neutral">

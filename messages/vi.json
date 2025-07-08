@@ -40,7 +40,14 @@
     "dateCreated": "Ngày tạo",
     "searchBlogByTitle": "Tìm kiếm bài viết theo tiêu đề",
     "noBlogFound": "Không tìm thấy bài viết nào phù hợp với tìm kiếm của bạn.",
-    "noBlogAvailable": "Không có bài viết nào hiện có."
+    "noBlogAvailable": "Không có bài viết nào hiện có.",
+    "detail": {
+      "home": "TRANG CHỦ",
+      "blogs": "GÓC NHÌN BẤT ĐỘNG SẢN",
+      "author": "Tác giả",
+      "createDate": "Ngày tạo",
+      "information": "Thông tin bài viết"
+    }
   },
   "ProductPage": {
     "title": "SẢN PHẨM",

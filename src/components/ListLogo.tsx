@@ -1,11 +1,28 @@
+"use client";
 import Image from "next/image";
 import Group1 from "@/assets/Group/Group 1.svg";
 import Group2 from "@/assets/Group/Group 2.svg";
 import Group3 from "@/assets/Group/Group 3.svg";
 import Group4 from "@/assets/Group/Group 4.svg";
 import Group5 from "@/assets/Group/Group 5.svg";
+import { useLoading } from "@/contexts/LoadingContext";
 
 export default function ListLogo() {
+  const { loading } = useLoading();
+
+  if (loading) {
+    return (
+      <div className="flex flex-wrap md:flex-nowrap justify-between items-center py-4 px-6 xl:px-0 md:py-20">
+        {Array.from({ length: 5 }).map((_, idx) => (
+          <div
+            key={idx}
+            className="skeleton w-24 lg:w-40 h-16 rounded-xl mx-2"
+          />
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-wrap md:flex-nowrap justify-between items-center py-4 px-6 xl:px-0 md:py-20">
       <Image

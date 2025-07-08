@@ -17,6 +17,7 @@ import {
   Project,
   Area,
 } from "../lib/api";
+import { useLoading } from "@/contexts/LoadingContext";
 
 type SubMenuItem = { name: string; href: string };
 type SubItem = { name: string; subMenuItem: SubMenuItem[] };
@@ -199,8 +200,7 @@ export default function Navigation() {
   const [areas, setAreas] = useState<Area[]>([]);
   const [projects, setProjects] = useState<Project[]>([]);
   const [apartmentTypes, setApartmentTypes] = useState<ApartmentType[]>([]);
-  const [loading, setLoading] = useState(true);
-
+  const { loading, setLoading } = useLoading();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -227,8 +227,30 @@ export default function Navigation() {
         <SwitchLocale />
         <div className="divider bg-neutral m-0"></div>
         <div className="navbar bg-neutral shadow-sm py-5">
-          <div className="container mx-auto flex flex-row items-center justify-center">
-            <div className="loading loading-spinner loading-md"></div>
+          <div className="container mx-auto flex flex-row items-center justify-start">
+            <div className="navbar-start flex items-center gap-4">
+              {/* Skeleton for hamburger icon */}
+              <div className="lg:hidden">
+                <div className="skeleton w-10 h-10 rounded"></div>
+              </div>
+              {/* Skeleton for logo */}
+              <div>
+                <div className="skeleton w-32 h-10 rounded"></div>
+              </div>
+            </div>
+            {/* Skeleton for menu */}
+            <div className="navbar-center hidden lg:flex flex-1 justify-center">
+              <div className="flex gap-6">
+                <div className="skeleton w-20 h-6 rounded"></div>
+                <div className="skeleton w-20 h-6 rounded"></div>
+                <div className="skeleton w-20 h-6 rounded"></div>
+                <div className="skeleton w-20 h-6 rounded"></div>
+              </div>
+            </div>
+            {/* Skeleton for right side (if any) */}
+            <div className="navbar-end flex-1 justify-end hidden lg:flex">
+              <div className="skeleton w-16 h-6 rounded"></div>
+            </div>
           </div>
         </div>
       </div>

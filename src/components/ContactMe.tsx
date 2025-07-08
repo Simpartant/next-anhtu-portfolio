@@ -53,6 +53,7 @@ const IconInput = ({
 );
 
 import type { StaticImageData } from "next/image";
+import { useLoading } from "@/contexts/LoadingContext";
 
 const ContactItem = ({
   icon,
@@ -70,6 +71,7 @@ const ContactItem = ({
 export default function ContactMe() {
   const t = useTranslations("ContactMe");
   const [products, setProducts] = useState<{ id: string; name: string }[]>([]);
+  const { loading } = useLoading();
 
   useEffect(() => {
     fetch("/api/products")
@@ -78,16 +80,54 @@ export default function ContactMe() {
       .catch((err) => console.error("Failed to fetch products", err));
   }, []);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const values: Record<string, string> = {};
     formData.forEach((value, key) => {
       values[key] = value.toString();
     });
-    toast.success("Gửi thành công!");
-    e.currentTarget.reset();
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      if (!res.ok) throw new Error("Failed to send");
+      toast.success("Gửi thành công!");
+      e.currentTarget.reset();
+    } catch (err) {
+      console.log(err);
+      toast.error("Có lỗi xảy ra, vui lòng thử lại!");
+    }
   };
+
+  if (loading) {
+    return (
+      <section className="lg:mx-auto py-10 lg:py-20 px-6 xl:px-0">
+        <div className="skeleton h-12 w-1/3 mb-8 rounded" />
+        <div className="flex flex-col lg:flex-row gap-20 lg:gap-45 mt-12">
+          <div className="w-full lg:w-1/2">
+            {Array.from({ length: 4 }).map((_, idx) => (
+              <div key={idx} className="skeleton h-4 w-full mb-4 rounded" />
+            ))}
+            <div className="skeleton h-24 w-full mb-8 rounded" />
+            <div className="skeleton h-12 w-40 mb-4 rounded" />
+          </div>
+
+          <div className="flex flex-col">
+            <div className="skeleton w-[278px] h-24 hidden lg:block mb-8 rounded-xl" />
+            <div className="flex flex-col gap-8 mt-6">
+              {Array.from({ length: 5 }).map((_, idx) => (
+                <div key={idx} className="skeleton h-8 w-64 rounded" />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="lg:mx-auto py-10 lg:py-20 px-6 xl:px-0">

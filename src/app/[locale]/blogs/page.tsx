@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import BlogCard from "@/components/Blogs/BlogCard";
 import { useTranslations } from "next-intl";
+import { useLoading } from "@/contexts/LoadingContext";
 
 interface Blog {
   _id: string;
@@ -16,7 +17,7 @@ export default function BlogsPage() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [filteredBlogs, setFilteredBlogs] = useState<Blog[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [loading, setLoading] = useState(true);
+  const { loading, setLoading } = useLoading();
   const [error, setError] = useState("");
 
   const t = useTranslations("BlogPage");
@@ -66,7 +67,21 @@ export default function BlogsPage() {
     return (
       <div className="container mx-auto py-10 lg:py-20 px-6 xl:px-0">
         <div className="text-4xl mb-16">{t("title")}</div>
-        <div className="text-center">Loading blogs...</div>
+        {/* Skeleton for search input */}
+        <div className="mb-10 lg:mb-16">
+          <div className="skeleton w-full lg:w-[50%] h-[4em] mb-4"></div>
+        </div>
+        {/* Skeleton grid for blog cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[...Array(6)].map((_, idx) => (
+            <div key={idx} className="space-y-4">
+              <div className="skeleton h-48 w-full rounded-lg" />
+              <div className="skeleton h-6 w-3/4" />
+              <div className="skeleton h-4 w-full" />
+              <div className="skeleton h-4 w-1/2" />
+            </div>
+          ))}
+        </div>
       </div>
     );
   }

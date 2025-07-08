@@ -43,7 +43,14 @@ declare const messages: {
     "dateCreated": "Date Created",
     "searchBlogByTitle": "Search blog by title",
     "noBlogFound": "No blogs found matching your search.",
-    "noBlogAvailable": "No blogs available."
+    "noBlogAvailable": "No blogs available.",
+    "detail": {
+      "home": "HOME",
+      "blogs": "BLOGS",
+      "author": "Author",
+      "createDate": "Create Date",
+      "information": "Blog Information"
+    }
   },
   "ProductPage": {
     "title": "PRODUCTS",

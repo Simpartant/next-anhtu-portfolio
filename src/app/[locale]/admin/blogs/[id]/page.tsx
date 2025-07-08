@@ -9,6 +9,7 @@ import { Editor } from "@tinymce/tinymce-react";
 const EMPTY_BLOG = {
   title: "",
   content: "",
+  author: "",
   image: "",
   description: "",
 };
@@ -150,6 +151,17 @@ export default function BlogDetailPage() {
               type="text"
               name="description"
               value={blog.description}
+              onChange={handleInputChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
+          <div>
+            <label className="block mb-1 font-medium">Author</label>
+            <input
+              type="text"
+              name="author"
+              value={blog.author}
               onChange={handleInputChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               required

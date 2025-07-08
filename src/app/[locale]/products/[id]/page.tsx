@@ -2,6 +2,7 @@
 import ActionComponent from "@/components/ActionComponent";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ContactMe from "@/components/ContactMe";
+import { useLoading } from "@/contexts/LoadingContext";
 import { ProjectType } from "@/models/Product";
 import { decodeId } from "@/utils/hash";
 import { useTranslations } from "next-intl";
@@ -28,7 +29,7 @@ interface ProductResponse {
 // Custom hooks
 const useProduct = (id: string) => {
   const [product, setProduct] = useState<ProductResponse | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { loading, setLoading } = useLoading();
   const router = useRouter();
 
   useEffect(() => {
@@ -196,7 +197,7 @@ const ProductDetail = ({
   <div className="py-5 lg:py-10">
     <div className="font-bold text-2xl">{t("information")}</div>
     <div
-      className="prose prose-lg text-sm/8 max-w-none mt-4 
+      className="prose prose-lg text-base/8 max-w-none mt-4 
         prose-headings:text-white 
         prose-p:text-gray-300 
         prose-a:text-blue-400 prose-a:underline hover:prose-a:text-blue-300
@@ -211,6 +212,60 @@ const ProductDetail = ({
         [&_ol]:list-decimal [&_ol]:ml-6"
       dangerouslySetInnerHTML={{ __html: detail }}
     />
+  </div>
+);
+
+// Skeleton component
+const ProductSkeleton = () => (
+  <div className="animate-pulse">
+    {/* Breadcrumbs skeleton */}
+    <div className="h-6 w-40 bg-base-300 rounded mb-8 skeleton"></div>
+
+    {/* Image skeleton */}
+    <div className="mb-4 flex justify-center">
+      <div className="w-full h-[20rem] lg:h-[50rem] bg-base-300 rounded skeleton"></div>
+    </div>
+    <div className="hidden xl:flex gap-2 justify-between mb-8">
+      {[...Array(5)].map((_, idx) => (
+        <div key={idx} className="w-36 h-36 bg-base-300 rounded skeleton"></div>
+      ))}
+    </div>
+    <div className="xl:hidden flex gap-2 mb-8">
+      {[...Array(3)].map((_, idx) => (
+        <div
+          key={idx}
+          className="w-24 h-24 md:w-32 md:h-32 lg:w-28 lg:h-28 bg-base-300 rounded skeleton"
+        ></div>
+      ))}
+    </div>
+
+    {/* Info skeleton */}
+    <div className="flex flex-col items-start gap-6 py-5 lg:py-10">
+      <div className="h-8 w-48 bg-base-300 rounded skeleton"></div>
+      <div className="h-4 w-64 bg-base-300 rounded skeleton"></div>
+    </div>
+    <div className="divider"></div>
+    <div className="flex flex-row justify-between lg:justify-start lg:gap-50 py-5 lg:py-10">
+      {[...Array(3)].map((_, idx) => (
+        <div key={idx} className="flex flex-col gap-3 items-start">
+          <div className="h-4 w-20 bg-base-300 rounded skeleton"></div>
+          <div className="h-6 w-24 bg-base-300 rounded skeleton"></div>
+        </div>
+      ))}
+    </div>
+
+    {/* Detail skeleton */}
+    <div className="py-5 lg:py-10">
+      <div className="h-6 w-40 bg-base-300 rounded skeleton mb-4"></div>
+      <div className="space-y-3">
+        {[...Array(5)].map((_, idx) => (
+          <div
+            key={idx}
+            className="h-4 w-full bg-base-300 rounded skeleton"
+          ></div>
+        ))}
+      </div>
+    </div>
   </div>
 );
 
@@ -233,7 +288,7 @@ export default function ProductDetailPage() {
     }
   }, [product]);
 
-  if (!id || loading) return null;
+  if (!id || loading) return <ProductSkeleton />;
 
   const prevPage = [
     { name: t("home"), href: "/" },

@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { ReactNode } from "react";
 import Navigation from "./Navigation";
 import Footer from "./Footer";
+import { LoadingProvider } from "@/contexts/LoadingContext";
 
 type Props = {
   children: ReactNode;
@@ -24,9 +25,11 @@ export default function ConditionalLayout({ children }: Props) {
   if (isAbout) {
     return (
       <>
-        <Navigation />
-        {children}
-        <Footer />
+        <LoadingProvider>
+          <Navigation />
+          {children}
+          <Footer />
+        </LoadingProvider>
       </>
     );
   }
@@ -34,9 +37,11 @@ export default function ConditionalLayout({ children }: Props) {
   // Regular pages - with Navigation, Footer, and container
   return (
     <>
-      <Navigation />
-      <div className="container mx-auto h-full">{children}</div>
-      <Footer />
+      <LoadingProvider>
+        <Navigation />
+        <div className="container mx-auto h-full">{children}</div>
+        <Footer />
+      </LoadingProvider>
     </>
   );
 }

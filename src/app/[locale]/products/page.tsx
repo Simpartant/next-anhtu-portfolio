@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import ProductCard from "@/components/Products/ProductCard";
+import { useLoading } from "@/contexts/LoadingContext";
 
 interface ProductProps {
   _id: string;
@@ -24,7 +25,7 @@ function ProductsPageContent() {
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
   const [selectedInvestors, setSelectedInvestors] = useState<string[]>([]);
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { loading, setLoading } = useLoading();
   const [error, setError] = useState<string | null>(null);
   const [filtersInitialized, setFiltersInitialized] = useState(false);
 
@@ -564,14 +565,7 @@ function ProductsPageContent() {
     selectedProject !== null;
 
   if (loading) {
-    return (
-      <div className="container mx-auto py-20 px-6 lg:px-0">
-        <div className="text-4xl mb-16">{t("title")}</div>
-        <div className="flex justify-center items-center h-64">
-          <div className="loading loading-spinner loading-lg"></div>
-        </div>
-      </div>
-    );
+    return <ProductsPageLoadingSkeleton />;
   }
 
   if (error) {
@@ -684,12 +678,62 @@ function ProductsPageContent() {
   );
 }
 
-function ProductsPageLoading() {
+function ProductsPageLoadingSkeleton() {
+  // Skeleton for filter sidebar
+  const FilterSkeleton = () => (
+    <div className="space-y-8">
+      {[...Array(3)].map((_, idx) => (
+        <div key={idx}>
+          <div className="skeleton h-6 w-32 mb-4" />
+          <div className="space-y-3">
+            {[...Array(3)].map((__, i) => (
+              <div className="flex items-center gap-3" key={i}>
+                <div className="skeleton h-4 w-4 rounded" />
+                <div className="skeleton h-4 w-20" />
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+
+  // Skeleton for product cards
+  const ProductCardSkeleton = () => (
+    <div className="rounded-xl border p-4 flex flex-col gap-2">
+      <div className="skeleton h-40 w-full rounded-xl mb-2" />
+      <div className="skeleton h-6 w-2/3 mb-1" />
+      <div className="skeleton h-4 w-1/2" />
+      <div className="skeleton h-4 w-1/3" />
+    </div>
+  );
+
   return (
-    <div className="container mx-auto py-20">
-      <div className="text-4xl mb-16">Products</div>
-      <div className="flex justify-center items-center h-64">
-        <div className="loading loading-spinner loading-lg"></div>
+    <div className="container mx-auto py-10 lg:py-20 px-6 lg:px-0">
+      <div className="text-4xl mb-16">
+        <div className="skeleton h-10 w-40" />
+      </div>
+      <div className="flex flex-col lg:flex-row gap-8">
+        {/* Left skeleton filter */}
+        <div className="lg:w-1/6">
+          <FilterSkeleton />
+        </div>
+        <div className="hidden lg:block w-px"></div>
+        {/* Right skeleton products */}
+        <div className="lg:w-2/3">
+          {/* Skeleton for filter buttons */}
+          <div className="mb-8 flex flex-wrap gap-2">
+            {[...Array(3)].map((_, i) => (
+              <div className="skeleton h-10 w-24 rounded-xl" key={i} />
+            ))}
+          </div>
+          {/* Skeleton grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            {[...Array(6)].map((_, i) => (
+              <ProductCardSkeleton key={i} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -697,7 +741,7 @@ function ProductsPageLoading() {
 
 export default function ProductsPage() {
   return (
-    <Suspense fallback={<ProductsPageLoading />}>
+    <Suspense fallback={<ProductsPageLoadingSkeleton />}>
       <ProductsPageContent />
     </Suspense>
   );

@@ -8,7 +8,7 @@ interface Blog {
   _id: string;
   title: string;
   description: string;
-  slug: string;
+  author: string;
 }
 
 export default function BlogsAdminPage() {
@@ -56,10 +56,8 @@ export default function BlogsAdminPage() {
 
   const handleCancelDelete = () => setBlogToDelete(null);
 
-  const filteredBlogs = blogs.filter(
-    (blog) =>
-      blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      blog.slug.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredBlogs = blogs.filter((blog) =>
+    blog.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -69,7 +67,7 @@ export default function BlogsAdminPage() {
         <div className="mb-4 flex justify-between items-center gap-4">
           <input
             type="text"
-            placeholder="Search by title or slug..."
+            placeholder="Search by title..."
             className="input input-bordered border-gray-700 shadow-none bg-primary-2 w-[34rem] max-w-md"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -90,16 +88,19 @@ export default function BlogsAdminPage() {
                 <tr>
                   <th>Title</th>
                   <th>Description</th>
-                  <th>Slug</th>
+                  <th>Author</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredBlogs.map((blog) => (
-                  <tr className="hover:bg-gray-700 border-b-gray-700" key={blog._id}>
+                  <tr
+                    className="hover:bg-gray-700 border-b-gray-700"
+                    key={blog._id}
+                  >
                     <td>{blog.title}</td>
                     <td>{blog.description}</td>
-                    <td>{blog.slug}</td>
+                    <td>{blog.author}</td>
                     <td>
                       <div className="flex gap-2">
                         <Link

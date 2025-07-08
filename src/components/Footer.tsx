@@ -5,6 +5,7 @@ import Facebook from "@/assets/icons/social/facebook.svg";
 import Tiktok from "@/assets/icons/social/tiktok.svg";
 import Youtube from "@/assets/icons/social/youtube.svg";
 import { useTranslations } from "next-intl";
+import { useLoading } from "@/contexts/LoadingContext";
 
 const SocialLinks = () => (
   <div className="flex flex-row items-center justify-start gap-6 mt-10">
@@ -33,6 +34,45 @@ const PolicyLinks = ({ t }: { t: (key: string) => string }) => (
 
 export default function Footer() {
   const t = useTranslations("Footer");
+  const { loading } = useLoading();
+
+  if (loading) {
+    return (
+      <div className="flex w-full flex-col">
+        <footer className="footer sm:footer-horizontal bg-neutral text-neutral-content p-10">
+          <div className="container mx-auto flex flex-col sm:flex-row justify-between">
+            <aside>
+              <div className="flex flex-col gap-4">
+                <div className="skeleton w-16 h-16 rounded-xl mb-2" />
+                <div className="skeleton h-8 w-40 rounded mb-2" />
+              </div>
+              <div className="flex flex-row items-center justify-start gap-6 mt-10">
+                {Array.from({ length: 3 }).map((_, idx) => (
+                  <div key={idx} className="skeleton w-10 h-10 rounded-full" />
+                ))}
+              </div>
+            </aside>
+            <div className="flex flex-col sm:flex-row gap-10 text-base mt-10 gap-0 sm:gap-30 sm:mt-0">
+              <div className="flex flex-col gap-8">
+                {Array.from({ length: 5 }).map((_, idx) => (
+                  <div key={idx} className="skeleton h-6 w-24 rounded mb-2" />
+                ))}
+              </div>
+              <div className="flex flex-col gap-8 mt-6 sm:mt-0">
+                {Array.from({ length: 2 }).map((_, idx) => (
+                  <div key={idx} className="skeleton h-6 w-32 rounded mb-2" />
+                ))}
+              </div>
+            </div>
+          </div>
+        </footer>
+        <div className="divider bg-neutral m-0"></div>
+        <div className="card bg-neutral rounded-box grid h-20 place-items-center">
+          <div className="skeleton h-4 w-40 rounded" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex w-full flex-col">
