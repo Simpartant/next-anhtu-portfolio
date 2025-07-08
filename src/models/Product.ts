@@ -8,17 +8,14 @@ export enum ProjectType {
 
 const ProductSchema = new Schema(
   {
-    name: String,
-    area: String,
-    investor: String,
+    name: { type: String, required: true, index: true },
+    area: { type: String, required: true, index: true },
+    investor: { type: String, required: true, index: true },
+    type: { type: String, required: true, index: true },
+    apartmentType: { type: String, required: true, index: true },
     defaultImage: String,
     listImages: [String],
     detail: String,
-    type: {
-      type: String,
-      enum: Object.values(ProjectType),
-    },
-    apartmentType: String,
     acreage: String,
   },
   { timestamps: true }

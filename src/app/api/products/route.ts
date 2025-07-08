@@ -103,7 +103,15 @@ export async function GET(req: NextRequest) {
     if (apartmentType) filter.apartmentType = apartmentType;
     if (project) filter.name = project; // Filter theo name field
 
-    const products = await Product.find(filter).sort({ createdAt: -1 });
+    const page = parseInt(searchParams.get("page") || "1", 10);
+    const limit = parseInt(searchParams.get("limit") || "50", 10);
+    const skip = (page - 1) * limit;
+
+    const products = await Product.find(filter)
+      .select("name area investor defaultImage slug apartmentType") // thêm apartmentType
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit); // giới hạn 50 sản phẩm
 
     return NextResponse.json(products);
   } catch (error) {

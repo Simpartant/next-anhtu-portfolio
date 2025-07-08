@@ -93,7 +93,22 @@ export async function GET(
     const productId = new ObjectId(id);
 
     // Find the product
-    const product = await collection.findOne({ _id: productId });
+    const product = await collection.findOne(
+      { _id: productId },
+      {
+        projection: {
+          name: 1,
+          area: 1,
+          investor: 1,
+          detail: 1,
+          type: 1,
+          apartmentType: 1,
+          acreage: 1,
+          listImages: 1,
+          defaultImage: 1,
+        },
+      }
+    );
 
     if (!product) {
       return createErrorResponse("Product not found", 404);
