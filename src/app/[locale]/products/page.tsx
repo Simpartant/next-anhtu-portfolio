@@ -28,6 +28,7 @@ function ProductsPageContent() {
   const { loading, setLoading } = useLoading();
   const [error, setError] = useState<string | null>(null);
   const [filtersInitialized, setFiltersInitialized] = useState(false);
+  const [filtersLoaded, setFiltersLoaded] = useState(false); // thêm state này
 
   // Dropdown states for mobile
   const [areaDropdownOpen, setAreaDropdownOpen] = useState(false);
@@ -197,7 +198,6 @@ function ProductsPageContent() {
         console.error("Failed to fetch apartment types:", error);
       }
     };
-
     const fetchAreas = async () => {
       try {
         const res = await fetch("/api/products/areas");
@@ -207,7 +207,6 @@ function ProductsPageContent() {
         console.error("Failed to fetch areas:", error);
       }
     };
-
     const fetchInvestors = async () => {
       try {
         const res = await fetch("/api/products/investors");
@@ -217,7 +216,6 @@ function ProductsPageContent() {
         console.error("Failed to fetch investors:", error);
       }
     };
-
     const fetchProjects = async () => {
       try {
         const res = await fetch("/api/products/projects");
@@ -236,6 +234,7 @@ function ProductsPageContent() {
         fetchInvestors(),
         fetchProjects(),
       ]);
+      setFiltersLoaded(true); // Đánh dấu đã load xong filter/options
 
       // Initialize filters from URL params
       const params = initializeFiltersFromParams();
@@ -564,6 +563,11 @@ function ProductsPageContent() {
     selectedInvestors.length > 0 ||
     selectedProject !== null;
 
+  // Nếu chưa load xong filter/options thì show skeleton luôn
+  if (!filtersLoaded) {
+    return <ProductsPageLoadingSkeleton />;
+  }
+
   if (loading) {
     return <ProductsPageLoadingSkeleton />;
   }
@@ -700,7 +704,7 @@ function ProductsPageLoadingSkeleton() {
 
   // Skeleton for product cards
   const ProductCardSkeleton = () => (
-    <div className="rounded-xl border p-4 flex flex-col gap-2">
+    <div className="rounded-xl p-4 flex flex-col gap-2">
       <div className="skeleton h-40 w-full rounded-xl mb-2" />
       <div className="skeleton h-6 w-2/3 mb-1" />
       <div className="skeleton h-4 w-1/2" />

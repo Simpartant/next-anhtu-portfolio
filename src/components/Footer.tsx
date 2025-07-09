@@ -80,11 +80,12 @@ export default function Footer() {
         <div className="container mx-auto flex flex-col sm:flex-row justify-between">
           <aside>
             <div className="flex flex-col gap-4">
-              <Image src={LogoOnly} alt="Logo only" />
+              <Image src={LogoOnly} alt="Logo only" draggable="false" />
               <Image
                 src={TextLogo}
-                className="md:w-[15rem] xl:w-full"
+                className="md:w-[15rem] xl:w-[20rem]"
                 alt="Text Logo"
+                draggable="false"
               />
             </div>
             <SocialLinks />

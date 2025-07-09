@@ -49,6 +49,11 @@ export default function SideMenu() {
             Products
           </Link>
         </li>
+        <li>
+          <Link href="/admin/contacts" className="font-semibold">
+            Contact
+          </Link>
+        </li>
       </ul>
       <button onClick={handleLogout} className="btn btn-error mt-4 w-full">
         Logout

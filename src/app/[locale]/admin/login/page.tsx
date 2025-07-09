@@ -67,7 +67,7 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md flex flex-col items-center">
         <div className="text-4xl font-bold">Admin Login</div>
         <div className="flex flex-col gap-5 mt-6">
-          <label className="input validato bg-primary-2">
+          <label className="input bg-primary-2">
             <svg
               className="h-[1em] opacity-50"
               xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +93,7 @@ export default function AdminLoginPage() {
             />
           </label>
 
-          <label className="input validator bg-primary-2">
+          <label className="input bg-primary-2">
             <svg
               className="h-[1em] opacity-50"
               xmlns="http://www.w3.org/2000/svg"
