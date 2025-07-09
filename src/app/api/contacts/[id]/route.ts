@@ -1,14 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongodb";
-
 import Contact from "@/models/Contact";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
   await connectDB();
-  const { id } = params;
+  const { id } = context.params;
 
   try {
     const contact = await Contact.findById(id).lean();
