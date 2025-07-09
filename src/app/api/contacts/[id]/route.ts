@@ -14,6 +14,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Contact not found" }, { status: 404 });
     }
     return NextResponse.json({ data: contact });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
