@@ -30,12 +30,12 @@ function RenderSubMenu({
   onItemClick?: () => void;
 }) {
   return (
-    <ul className="p-2">
+    <ul className="p-2 border-l border-zinc-800">
       {subItems.map((subItem, index) => (
         <li key={`submenu-${index}`}>
           <div className="font-bold">{subItem.name}</div>
           {subItem.subMenuItem?.length > 0 && (
-            <ul>
+            <ul className="border-l border-zinc-800">
               {subItem.subMenuItem.map((subMenu, subMenuIndex) => (
                 <li key={`submenu-item-${index}-${subMenuIndex}`}>
                   <Link href={subMenu.href} onClick={onItemClick}>
@@ -169,7 +169,7 @@ function DesktopMenu({ navItems }: { navItems: NavItem[] }) {
                   <li key={`desktop-sub-${index}-${subIndex}`}>
                     <div className="font-bold">{subItem.name}</div>
                     {subItem.subMenuItem?.length > 0 && (
-                      <ul>
+                      <ul className="p-2 border-l border-zinc-900">
                         {subItem.subMenuItem.map((subMenu, subMenuIndex) => (
                           <li
                             key={`desktop-submenu-${index}-${subIndex}-${subMenuIndex}`}

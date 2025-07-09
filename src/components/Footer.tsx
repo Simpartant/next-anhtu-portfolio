@@ -83,7 +83,7 @@ export default function Footer() {
               <Image src={LogoOnly} alt="Logo only" draggable="false" />
               <Image
                 src={TextLogo}
-                className="md:w-[15rem] xl:w-[20rem]"
+                className="md:w-[15rem] xl:w-[20rem] mix-blend-screen"
                 alt="Text Logo"
                 draggable="false"
               />

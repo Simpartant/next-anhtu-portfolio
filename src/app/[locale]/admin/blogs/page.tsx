@@ -133,7 +133,7 @@ export default function BlogsAdminPage() {
         {/* Delete Confirmation Modal */}
         {blogToDelete && (
           <div className="modal modal-open">
-            <div className="modal-box">
+            <div className="modal-box bg-neutral">
               <h3 className="font-bold text-lg">Confirm Delete</h3>
               <p className="py-4">
                 Are you sure you want to delete the blog &quot;

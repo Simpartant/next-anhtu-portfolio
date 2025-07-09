@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
   }
   await connectDB();
 
-  const { title, content, image, description } = await req.json();
+  const { title, content, image, description, author } = await req.json();
 
   if (!title || !content || !image || !description) {
     return NextResponse.json({ error: "Missing fields" }, { status: 400 });
@@ -23,6 +23,7 @@ export async function POST(req: NextRequest) {
       content,
       image,
       description,
+      author,
     });
     return NextResponse.json(newBlog, { status: 201 });
   } catch (err) {
