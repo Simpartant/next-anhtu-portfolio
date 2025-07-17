@@ -20,9 +20,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `${process.env.PROD_URL}/blogs/${id}`,
       images: [
         {
-          url: "https://blog.myoceancity.vn/wp-content/uploads/lich-su-ttbds-2.jpg",
-          width: 1200,
-          height: 630,
+          url: "https://image.vietstock.vn/2020/04/17/bat-dong-san-truc-tuyen.jpg",
+          width: 600,
+          height: 315,
           alt: data.title,
         },
       ],
