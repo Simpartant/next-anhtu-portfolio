@@ -20,9 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `${process.env.PROD_URL}/blogs/${id}`,
       images: [
         {
-          url: data.image.startsWith("http")
-            ? data.image
-            : `data:image/jpeg;base64,${data.image}`,
+          url: data.image,
           width: 1200,
           height: 630,
           alt: data.title,
