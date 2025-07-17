@@ -82,21 +82,22 @@ export default function ContactMe() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget; // Save reference before async code
+    const formData = new FormData(form);
     const values: Record<string, string> = {};
     formData.forEach((value, key) => {
       values[key] = value.toString();
     });
 
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("/api/contacts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
       if (!res.ok) throw new Error("Failed to send");
       toast.success("Gửi thành công!");
-      e.currentTarget.reset();
+      form.reset(); // Use saved reference
     } catch (err) {
       console.log(err);
       toast.error("Có lỗi xảy ra, vui lòng thử lại!");

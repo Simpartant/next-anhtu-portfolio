@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter, usePathname } from "next/navigation";
 import imageCompression from "browser-image-compression";
 import { Editor } from "@tinymce/tinymce-react";
+import { useTranslations } from "next-intl";
 
 const EMPTY_BLOG = {
   title: "",
@@ -28,6 +29,10 @@ export default function BlogDetailPage() {
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(!isCreateMode);
   const [error, setError] = useState("");
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const [toastType, setToastType] = useState<"success" | "error">("success");
+  const t = useTranslations("Admin");
 
   // Fetch blog data if edit mode
   useEffect(() => {
@@ -105,8 +110,26 @@ export default function BlogDetailPage() {
         throw new Error(
           isCreateMode ? "Failed to create blog" : "Failed to update blog"
         );
-      router.push("/admin/blogs");
+      setToastType("success");
+      setToastMessage(
+        isCreateMode
+          ? t("Blog.createSuccess") || "Blog created successfully!"
+          : t("Blog.updateSuccess") || "Blog updated successfully!"
+      );
+      setShowToast(true);
+      setTimeout(() => {
+        setShowToast(false);
+        router.push("/admin/blogs");
+      }, 2000);
     } catch (err: unknown) {
+      setToastType("error");
+      setToastMessage(
+        err instanceof Error
+          ? err.message
+          : t("Blog.error") || "Error occurred!"
+      );
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 2500);
       if (err instanceof Error) {
         setError(err.message);
       } else {
@@ -130,12 +153,20 @@ export default function BlogDetailPage() {
   return (
     <PageLayout>
       <div className="container max-w-2xl">
+        {/* Toast daisyUI */}
+        {showToast && (
+          <div className="toast toast-top toast-end z-50">
+            <div className={`alert alert-${toastType}`}>
+              <span>{toastMessage}</span>
+            </div>
+          </div>
+        )}
         <h1 className="text-2xl font-bold mb-4">
-          {isCreateMode ? "Create Blog" : "Edit Blog"}
+          {isCreateMode ? t("Blog.create") : t("Blog.edit")}
         </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block mb-1 font-medium">Title</label>
+            <label className="block mb-1 font-medium">{t("Blog.title")}</label>
             <input
               type="text"
               name="title"
@@ -146,7 +177,9 @@ export default function BlogDetailPage() {
             />
           </div>
           <div>
-            <label className="block mb-1 font-medium">Description</label>
+            <label className="block mb-1 font-medium">
+              {t("Blog.description")}
+            </label>
             <input
               type="text"
               name="description"
@@ -157,7 +190,7 @@ export default function BlogDetailPage() {
             />
           </div>
           <div>
-            <label className="block mb-1 font-medium">Author</label>
+            <label className="block mb-1 font-medium">{t("Blog.author")}</label>
             <input
               type="text"
               name="author"
@@ -168,7 +201,9 @@ export default function BlogDetailPage() {
             />
           </div>
           <div>
-            <label className="block mb-1 font-medium">Content</label>
+            <label className="block mb-1 font-medium">
+              {t("Blog.content")}
+            </label>
             <Editor
               apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
               value={blog.content}
@@ -185,7 +220,7 @@ export default function BlogDetailPage() {
             />
           </div>
           <div>
-            <label className="block mb-1 font-medium">Image</label>
+            <label className="block mb-1 font-medium">{t("Blog.image")}</label>
             <input
               type="file"
               accept="image/png, image/jpeg"
@@ -220,11 +255,11 @@ export default function BlogDetailPage() {
             >
               {saving
                 ? isCreateMode
-                  ? "Saving..."
-                  : "Updating..."
+                  ? t("Action.saving")
+                  : t("Action.updating")
                 : isCreateMode
-                ? "Create"
-                : "Update"}
+                  ? t("Action.create")
+                  : t("Action.update")}
             </button>
             <button
               type="button"
@@ -232,7 +267,7 @@ export default function BlogDetailPage() {
               onClick={() => router.push("/admin/blogs")}
               disabled={saving}
             >
-              Cancel
+              {t("Action.cancel")}
             </button>
           </div>
         </form>

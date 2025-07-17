@@ -7,7 +7,7 @@ import RelatedBlogs from "@/components/Blogs/Related-Blog";
 import ActionComponent from "@/components/ActionComponent";
 import ContactMe from "@/components/ContactMe";
 import { useTranslations } from "use-intl";
-import { useLoading } from "@/contexts/LoadingContext";
+import Head from "next/head";
 
 interface BlogData {
   _id: string;
@@ -23,7 +23,7 @@ export default function BlogDetail() {
   const { id } = useParams();
   const [data, setData] = useState<BlogData | null>(null);
   const t = useTranslations("BlogPage.detail");
-  const { loading, setLoading } = useLoading();
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (id) {
       setLoading(true);
@@ -79,6 +79,25 @@ export default function BlogDetail() {
 
   return (
     <>
+      <Head>
+        <title>{data.title}</title>
+        <meta property="og:title" content={data.title} />
+        <meta
+          property="og:image"
+          content={
+            data.image.startsWith("data:")
+              ? data.image
+              : `data:image/jpeg;base64,${data.image}`
+          }
+        />
+        <meta property="og:description" content={data.description} />
+        <meta property="og:type" content="article" />
+        <meta
+          property="og:url"
+          content={typeof window !== "undefined" ? window.location.href : ""}
+        />
+        <meta property="article:author" content={data.author} />
+      </Head>
       <div className="container mx-auto px-6 xl:px-0">
         <div className="py-10 lg:py-20">
           <Breadcrumbs

@@ -5,6 +5,7 @@ import { useParams, useRouter, usePathname } from "next/navigation";
 import PageLayout from "@/components/Admin/PageLayout";
 import { Editor } from "@tinymce/tinymce-react";
 import imageCompression from "browser-image-compression";
+import { useTranslations } from "next-intl";
 
 interface Product {
   name: string;
@@ -49,6 +50,8 @@ export default function ProductsDetailAdminPage() {
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [saving, setSaving] = useState(false);
   const [showRequiredError, setShowRequiredError] = useState(false);
+
+  const t = useTranslations("Admin");
 
   // --- Effects ---
 
@@ -332,7 +335,7 @@ export default function ProductsDetailAdminPage() {
       {showSuccessToast && (
         <div className="toast toast-top toast-end z-50">
           <div className="alert alert-success">
-            <span>Lưu thay đổi thành công!</span>
+            <span>{t("Product.updateSuccess")}</span>
           </div>
         </div>
       )}
@@ -340,13 +343,13 @@ export default function ProductsDetailAdminPage() {
       <div className="container">
         <div className="mb-6">
           <h1 className="text-3xl font-bold">
-            {isCreateMode ? "Tạo sản phẩm mới" : "Chi tiết sản phẩm"}
+            {isCreateMode ? t("Product.create") : t("Product.edit")}
           </h1>
         </div>
 
         {showRequiredError && (
           <div className="mb-4 text-red-600 font-semibold">
-            Vui lòng nhập đầy đủ các trường có dấu{" "}
+            {t("Product.pleaseInputRequirefield")}
             <span className="text-red-500">*</span>
           </div>
         )}
@@ -355,23 +358,35 @@ export default function ProductsDetailAdminPage() {
             {/* Left Column */}
             <div className="space-y-4">
               {[
-                { label: "Tên dự án", name: "name", required: true },
-                { label: "Khu vực", name: "area", required: true },
-                { label: "Chủ đầu tư", name: "investor", required: true },
+                { label: t("Product.name"), name: "name", required: true },
+                { label: t("Product.area"), name: "area", required: true },
                 {
-                  label: "Trạng thái",
+                  label: t("Product.investor"),
+                  name: "investor",
+                  required: true,
+                },
+                {
+                  label: t("Product.type"),
                   name: "type",
                   type: "select",
                   required: true,
                   options: [
-                    { value: "", label: "Chọn trạng thái" },
+                    { value: "", label: t("Product.typeOptions.default") },
                     { value: "Đang mở bán", label: "Đang mở bán" },
                     { value: "Booking", label: "Booking" },
                     { value: "Đang bàn giao", label: "Đang bàn giao" },
                   ],
                 },
-                { label: "Loại căn hộ", name: "apartmentType", required: true },
-                { label: "Diện tích", name: "acreage", required: true },
+                {
+                  label: t("Product.typeOfApartment"),
+                  name: "apartmentType",
+                  required: true,
+                },
+                {
+                  label: t("Product.acreage"),
+                  name: "acreage",
+                  required: true,
+                },
               ].map((field) =>
                 field.type === "select" ? (
                   <div key={field.name}>
@@ -423,7 +438,7 @@ export default function ProductsDetailAdminPage() {
               {/* Default Image */}
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  Hình ảnh chính
+                  {t("Product.mainImage")}
                 </label>
                 {isEditing && (
                   <>
@@ -439,7 +454,7 @@ export default function ProductsDetailAdminPage() {
                       }
                     />
                     <div className="text-xs text-gray-500 mt-1">
-                      Chỉ chọn 1 ảnh PNG/JPG.
+                      {t("Product.mainImageDescription")}
                     </div>
                   </>
                 )}
@@ -447,7 +462,7 @@ export default function ProductsDetailAdminPage() {
                   {defaultImageFile && (
                     <ImagePreview
                       src={URL.createObjectURL(defaultImageFile)}
-                      alt="Hình ảnh chính"
+                      alt={t("Product.mainImage")}
                       onRemove={
                         isEditing ? handleRemoveDefaultImage : undefined
                       }
@@ -468,7 +483,7 @@ export default function ProductsDetailAdminPage() {
               {/* List Images */}
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  Danh sách hình ảnh
+                  {t("Product.listImages")}
                 </label>
                 {isEditing && (
                   <div className="mb-2">
@@ -484,8 +499,9 @@ export default function ProductsDetailAdminPage() {
                       }
                     />
                     <div className="text-xs text-gray-500 mt-1">
-                      Chọn tối đa 10 ảnh PNG/JPG. Đã chọn:{" "}
-                      {imageFiles.length + product.listImages.length}
+                      {t("Product.listImagesDescription", {
+                        count: imageFiles.length + product.listImages.length,
+                      })}
                     </div>
                   </div>
                 )}
@@ -521,7 +537,7 @@ export default function ProductsDetailAdminPage() {
                 {isEditing &&
                   (imageFiles.length < 1 || imageFiles.length > 10) && (
                     <div className="text-red-500 text-xs mt-1">
-                      Vui lòng chọn ít nhất 1 và nhiều nhất 10 ảnh PNG/JPG.
+                      {t("Product.editListImagesDescription")}
                     </div>
                   )}
               </div>
@@ -529,7 +545,7 @@ export default function ProductsDetailAdminPage() {
               {/* Detail */}
               <div>
                 <label className="block text-sm font-medium mb-2">
-                  Mô tả chi tiết
+                  {t("Product.discription")}
                   <span className="text-red-500 ml-1">*</span>
                 </label>
                 <Editor
@@ -559,7 +575,7 @@ export default function ProductsDetailAdminPage() {
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                 disabled={saving}
               >
-                Chỉnh sửa
+                {t("Action.edit")}
               </button>
             )}
           </div>
@@ -573,12 +589,12 @@ export default function ProductsDetailAdminPage() {
                 {saving ? (
                   <>
                     <span className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></span>
-                    {isCreateMode ? "Đang tạo..." : "Đang lưu..."}
+                    {isCreateMode ? t("Action.saving") : t("Action.updating")}
                   </>
                 ) : isCreateMode ? (
-                  "Tạo mới"
+                  t("Action.create")
                 ) : (
-                  "Lưu thay đổi"
+                  t("Action.update")
                 )}
               </button>
               <button
@@ -586,7 +602,7 @@ export default function ProductsDetailAdminPage() {
                 className="px-6 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
                 disabled={saving}
               >
-                Hủy bỏ
+                {t("Action.cancel")}
               </button>
             </div>
           )}
@@ -598,11 +614,9 @@ export default function ProductsDetailAdminPage() {
         <div className="modal modal-open">
           <div className="modal-box">
             <h3 className="font-bold text-lg mb-2">
-              Bạn có muốn lưu thay đổi?
+              {t("Action.modal.changeTitle")}
             </h3>
-            <p className="mb-4">
-              Dữ liệu đã thay đổi, bạn muốn lưu lại hay hủy bỏ thay đổi?
-            </p>
+            <p className="mb-4">{t("Action.modal.changeMessage")}</p>
             <div className="modal-action">
               <button
                 className="btn btn-success"
@@ -611,10 +625,10 @@ export default function ProductsDetailAdminPage() {
                   handleSave();
                 }}
               >
-                Lưu thay đổi
+                {t("Action.modal.confirm")}
               </button>
               <button className="btn btn-outline" onClick={handleConfirmCancel}>
-                Hủy bỏ thay đổi
+                {t("Action.modal.cancel")}
               </button>
             </div>
           </div>

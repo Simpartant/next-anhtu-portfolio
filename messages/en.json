@@ -97,11 +97,11 @@
     "messagePlaceholder": "Example / Ví dụ:\n- Tôi là người Trung Quốc / I'm Chinese\n- Tôi là người Hàn Quốc / I'm Korean\n- Tôi là người Nhật / I'm Japanese\n- Tôi là người Thái Lan / I'm Thai\n- Tôi là người Singapore / I'm Singaporean\n- Tôi là người Pháp / I'm French\n- Tôi cần tư vấn về... / I need consultation about..."
   },
   "AboutPage": {
-    "title": "ABOUT",
-    "aboutIntroduce01": "Nguyễn Anh Tú is a Real Estate Investment Consultant, known for his strategic mindset and professional, dedicated work style. Born and raised in Vietnam, Tú early demonstrated a passion for the financial market and sustainable development models in the real estate sector. After graduating with a degree in Economics and Finance, he spent several years working at leading real estate companies, gaining extensive experience in investment consulting, market analysis, and asset portfolio management.",
-    "aboutIntroduce02": "With a keen ability to identify trends and assess the profitability potential of projects, Nguyễn Anh Tú is not merely a broker, but a strategic partner accompanying investors on their journey to build long-term wealth. His working style combines data-driven precision with sharp market intuition, delivering optimal solutions tailored to each financial goal.",
-    "aboutIntroduce03": "Tú has been invited as a speaker at investment seminars and training programs for young investors. He is also the author of numerous market analysis articles widely shared within the professional community. Throughout his career, Nguyễn Anh Tú has successfully advised on hundreds of high-value investment deals, helping to establish a solid reputation in Vietnam’s real estate investment landscape.",
-    "aboutIntroduce04": "Tú is currently expanding his network of strategic partners and aims to build a personalized investment consulting platform that leverages technology and data to maximize financial outcomes for clients. With a strong belief in sustainable value and professional responsibility, Nguyễn Anh Tú always puts clients’ interests first, viewing each successful deal as a long-term commitment.",
+    "title": "TRUSTED COMPANION",
+    "aboutIntroduce01": "Nguyen Anh Tu started his career in 2015—a time when Vietnam’s real estate market was shifting toward greater professionalism. By closely following the market for nearly 10 years, Tu has gained a practical perspective on market cycles and the factors that create real value in real estate.",
+    "aboutIntroduce02": "Tu’s priorities are clear legal status, product quality, developer reputation, and a foundation for sustainable urban development. These are the core criteria for selecting and recommending the most suitable products for each client.",
+    "aboutIntroduce03": "Tu is proud to be part of ERA Vietnam—an international real estate exchange that has successfully operated in many countries worldwide. ERA is currently the leading strategic distributor in Vietnam, with over 60 projects distributed nationwide. Thanks to this, Tu has access to a diverse range of properties and a comprehensive overview to compare, evaluate, and select products that truly match each client’s needs and goals.",
+    "aboutIntroduce04": "Southern real estate: the value of merging Ho Chi Minh City’s mega-urban area; fertile lands such as Long An, Nhon Trach, Bien Hoa, Long Thanh, Phu My… From residential, commercial, to tourism properties… Work with Nguyen Anh Tu, your trusted companion !",
     "saySentence01": "“I always strive to create investment opportunities that are sustainable, luxurious, and refined—where financial value goes hand in hand with quality of life. Every property I select and recommend must meet high standards of profitability potential, strategic location, and, most importantly, align with the sophisticated lifestyle of clients who truly understand what they seek in real estate.”",
     "saySentence02": "Nguyễn Anh Tú is the top choice for discerning investors seeking a trustworthy partner—someone who not only understands the market but also appreciates each client’s unique sense of style and living preferences. With the refined perspective of a Vietnamese professional and a global mindset in finance and lifestyle, Tú goes beyond property introductions to offer lifestyle consulting—a long-term, sustainable vision.",
     "aboutTitle": "AN INVESTMENT CONSULTANT IS ALSO A VALUE CREATOR",
@@ -112,5 +112,100 @@
   "Discover": {
     "title": "OUR TEAM",
     "description": "We are a group of innovate, experience, and proficient teams. You will love to collaborate with us."
+  },
+  "Admin": {
+    "SideMenu": {
+      "dashboard": "Dashboard",
+      "blogs": "Blogs",
+      "products": "Products",
+      "users": "Users",
+      "contacts": "Contacts",
+      "logout": "Logout"
+    },
+    "Blog": {
+      "namePage": "Blog Management",
+      "create": "Create Blog",
+      "edit": "Edit Blog",
+      "title": "Title",
+      "description": "Description",
+      "author": "Author",
+      "content": "Content",
+      "image": "Image",
+      "deleteTitle": "Delete Blog",
+      "deleteMessage": "Are you sure you want to delete the blog {title}? This action cannot be undone.",
+      "deleteSuccess": "Delete blog successfully",
+      "deleteError": "Delete blog failed",
+      "createSuccess": "Create blog successfully",
+      "updateSuccess": "Update blog successfully",
+      "noBlogAvailable": "No blogs available.",
+      "noBlogFound": "No blogs found matching your search."
+    },
+    "Product": {
+      "namePage": "Product Management",
+      "create": "Create Product",
+      "edit": "Edit Product",
+      "name": "Name",
+      "type": "Type",
+      "area": "Area",
+      "typeOfApartment": "Type of Apartment",
+      "investor": "Investor",
+      "acreage": "Acreage",
+      "deleteTitle": "Delete Product",
+      "deleteMessage": "Are you sure you want to delete the product {title}? This action cannot be undone.",
+      "deleteSuccess": "Delete product successfully",
+      "deleteError": "Delete product failed",
+      "createSuccess": "Create product successfully",
+      "updateSuccess": "Update product successfully",
+      "pleaseInputRequirefield": "Please input all required fields",
+      "typeOptions": {
+        "default": "Select Type"
+      },
+      "mainImage": "Main Image",
+      "mainImageDescription": "Select only 1 PNG/JPG image.",
+      "listImages": "Image List",
+      "listImagesDescription": "Select up to 10 PNG/JPG images. Selected: {count} images.",
+      "editListImagesDescription": "Please select at least 1 and at most 10 PNG/JPG images.",
+      "discription": "Detailed Description",
+      "noProductFound": "No products found matching your search.",
+      "noProductAvailable": "No products available."
+    },
+    "Contact": {
+      "namePage": "Contact Management",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "message": "Message",
+      "project": "Project",
+      "exportExcel": "Export Excel",
+      "exportExcelSuccess": "Export Excel successfully",
+      "exportError": "Export Excel failed",
+      "backToList": "Back to contact list",
+      "information": "Contact Information",
+      "noContactFound": "No contacts found matching your search.",
+      "noContactAvailable": "No contacts available."
+    },
+    "Action": {
+      "create": "Create New",
+      "update": "Update",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete?",
+      "cancel": "Cancel",
+      "save": "Save",
+      "edit": "Edit",
+      "view": "View Details",
+      "saving": "Saving...",
+      "updating": "Updating...",
+      "modal": {
+        "changeTitle": "Do you want to save changes?",
+        "changeMessage": "Data has changed, do you want to save or discard changes?",
+        "confirm": "Confirm Changes",
+        "cancel": "Discard Changes"
+      }
+    },
+    "Search": {
+      "blogs": "Search blogs by title",
+      "products": "Search products by project name, location, or apartment type",
+      "contacts": "Search contacts by name, email, phone number, or project"
+    }
   }
 }

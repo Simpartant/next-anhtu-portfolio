@@ -3,11 +3,14 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import SwitchLocale from "../SwitchLocale";
+import { useTranslations } from "next-intl";
 
 export default function SideMenu() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const pathname = usePathname();
+  const t = useTranslations("Admin.SideMenu");
 
   const locale = pathname.split("/")[1] || "en";
 
@@ -36,27 +39,30 @@ export default function SideMenu() {
       <ul className="menu bg-neutral rounded-box mb-4">
         <li>
           <Link href="/admin/dashboard" className="font-semibold">
-            Dashboard
+            {t("dashboard")}
           </Link>
         </li>
         <li>
           <Link href="/admin/blogs" className="font-semibold">
-            Blogs
+            {t("blogs")}
           </Link>
         </li>
         <li>
           <Link href="/admin/products" className="font-semibold">
-            Products
+            {t("products")}
           </Link>
         </li>
         <li>
           <Link href="/admin/contacts" className="font-semibold">
-            Contact
+            {t("contacts")}
           </Link>
+        </li>
+        <li>
+          <SwitchLocale role={"admin"} />
         </li>
       </ul>
       <button onClick={handleLogout} className="btn btn-error mt-4 w-full">
-        Logout
+        {t("logout")}
       </button>
     </nav>
   );

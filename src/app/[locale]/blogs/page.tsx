@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import BlogCard from "@/components/Blogs/BlogCard";
 import { useTranslations } from "next-intl";
-import { useLoading } from "@/contexts/LoadingContext";
 
 interface Blog {
   _id: string;
@@ -17,7 +16,7 @@ export default function BlogsPage() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [filteredBlogs, setFilteredBlogs] = useState<Blog[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const { loading, setLoading } = useLoading();
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const t = useTranslations("BlogPage");

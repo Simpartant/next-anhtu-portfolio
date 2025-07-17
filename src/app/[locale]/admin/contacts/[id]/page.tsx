@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import ArrowBack from "@/assets/icons/arrow-back.svg";
 import PageLayout from "@/components/Admin/PageLayout";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 type Contact = {
   _id: string;
@@ -20,6 +21,8 @@ export default function AdminContactDetailPage() {
   const router = useRouter();
   const [contact, setContact] = useState<Contact | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const t = useTranslations("Admin");
 
   useEffect(() => {
     if (!id) return;
@@ -47,9 +50,11 @@ export default function AdminContactDetailPage() {
             className="flex items-center gap-2 text-sm text-white hover:bg-white/10 hover:text-white px-3 py-2 rounded transition"
           >
             <Image src={ArrowBack} className="w-5 h-5 text-white" alt="" />
-            Trở về danh sách
+            {t("Contact.backToList")}
           </button>
-          <h1 className="text-2xl font-bold text-left">Chi tiết liên hệ</h1>
+          <h1 className="text-2xl font-bold text-left">
+            {t("Contact.information")}
+          </h1>
         </div>
         <div className="flex justify-start">
           <div className="shadow-lg rounded-xl p-8 w-full border border-gray-700">
@@ -59,37 +64,37 @@ export default function AdminContactDetailPage() {
               <div className="space-y-5">
                 <div>
                   <span className="block text-xs text-gray-400 uppercase mb-1">
-                    Tên
+                    {t("Contact.name")}
                   </span>
                   <span className="text-lg font-semibold">{contact.name}</span>
                 </div>
                 <div>
                   <span className="block text-xs text-gray-400 uppercase mb-1">
-                    Email
+                    {t("Contact.email")}
                   </span>
                   <span className="text-base">{contact.email}</span>
                 </div>
                 <div>
                   <span className="block text-xs text-gray-400 uppercase mb-1">
-                    Số điện thoại
+                    {t("Contact.phone")}
                   </span>
                   <span className="text-base">{contact.phone}</span>
                 </div>
                 <div>
                   <span className="block text-xs text-gray-400 uppercase mb-1">
-                    Dự án
+                    {t("Contact.project")}
                   </span>
                   <span className="text-base">{contact.project}</span>
                 </div>
                 <div>
                   <span className="block text-xs text-gray-400 uppercase mb-1">
-                    Tin nhắn
+                    {t("Contact.message")}
                   </span>
                   <div className="rounded text-base">{contact.message}</div>
                 </div>
               </div>
             ) : (
-              <div className="text-red-500">Không tìm thấy liên hệ.</div>
+              <div className="text-red-500">{t("Contact.noContactFound")}</div>
             )}
           </div>
         </div>

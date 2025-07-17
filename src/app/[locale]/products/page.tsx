@@ -4,7 +4,6 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import ProductCard from "@/components/Products/ProductCard";
-import { useLoading } from "@/contexts/LoadingContext";
 
 interface ProductProps {
   _id: string;
@@ -25,7 +24,7 @@ function ProductsPageContent() {
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
   const [selectedInvestors, setSelectedInvestors] = useState<string[]>([]);
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
-  const { loading, setLoading } = useLoading();
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [filtersInitialized, setFiltersInitialized] = useState(false);
   const [filtersLoaded, setFiltersLoaded] = useState(false); // thêm state này

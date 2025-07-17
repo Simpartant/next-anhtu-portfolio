@@ -1,6 +1,7 @@
 "use client";
 
 import PageLayout from "@/components/Admin/PageLayout";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -17,6 +18,7 @@ export default function ProductsAdminPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [productToDelete, setProductToDelete] = useState<Product | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const t = useTranslations("Admin");
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -93,13 +95,13 @@ export default function ProductsAdminPage() {
   return (
     <PageLayout>
       <div className="container">
-        <h1 className="text-2xl font-bold mb-4">Products Admin Page</h1>
+        <h1 className="text-2xl font-bold mb-4">{t("Product.namePage")}</h1>
 
         <div className="mb-4 flex justify-between items-center gap-4">
           <div className="max-w-md">
             <input
               type="text"
-              placeholder="Search by name, area, or investor..."
+              placeholder={t("Search.products")}
               className="input input-bordered border-gray-700 shadow-none bg-primary-2 w-[34rem]"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -110,7 +112,7 @@ export default function ProductsAdminPage() {
             href="/admin/products/create-product"
             className="btn btn-primary shadow-none text-black border-none"
           >
-            Create Product
+            {t("Product.create")}
           </Link>
         </div>
 
@@ -121,9 +123,9 @@ export default function ProductsAdminPage() {
             <table className="table w-full">
               <thead>
                 <tr className="text-white">
-                  <th>Name</th>
-                  <th>Area</th>
-                  <th>Investor</th>
+                  <th>{t("Product.name")}</th>
+                  <th>{t("Product.area")}</th>
+                  <th>{t("Product.investor")}</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -142,13 +144,13 @@ export default function ProductsAdminPage() {
                           href={`/admin/products/${product._id}`}
                           className="btn btn-sm btn-info"
                         >
-                          Edit
+                          {t("Action.edit")}
                         </Link>
                         <button
                           onClick={() => handleDeleteClick(product)}
                           className="btn btn-sm btn-error"
                         >
-                          Delete
+                          {t("Action.delete")}
                         </button>
                       </div>
                     </td>
@@ -160,8 +162,8 @@ export default function ProductsAdminPage() {
             {filteredProducts.length === 0 && !loading && (
               <div className="text-center py-4 text-gray-500">
                 {searchTerm
-                  ? "No products found matching your search."
-                  : "No products available."}
+                  ? t("Product.noProductFound")
+                  : t("Product.noProductAvailable")}
               </div>
             )}
 
@@ -206,10 +208,11 @@ export default function ProductsAdminPage() {
         {productToDelete && (
           <div className="modal modal-open">
             <div className="modal-box bg-neutral">
-              <h3 className="font-bold text-lg">Confirm Delete</h3>
+              <h3 className="font-bold text-lg">{t("Product.deleteTitle")}</h3>
               <p className="py-4">
-                Are you sure you want to delete the product &quot;
-                {productToDelete.name}&quot;? This action cannot be undone.
+                {t("Product.deleteMessage", {
+                  title: productToDelete.name,
+                })}
               </p>
               <div className="modal-action">
                 <button
@@ -217,7 +220,7 @@ export default function ProductsAdminPage() {
                   className="btn btn-outline"
                   disabled={isDeleting}
                 >
-                  Cancel
+                  {t("Action.cancel")}
                 </button>
                 <button
                   onClick={handleConfirmDelete}
@@ -227,7 +230,7 @@ export default function ProductsAdminPage() {
                   {isDeleting ? (
                     <span className="loading loading-spinner loading-sm"></span>
                   ) : (
-                    "Delete"
+                    t("Action.delete")
                   )}
                 </button>
               </div>

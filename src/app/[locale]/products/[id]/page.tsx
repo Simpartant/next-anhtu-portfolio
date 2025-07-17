@@ -2,12 +2,12 @@
 import ActionComponent from "@/components/ActionComponent";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import ContactMe from "@/components/ContactMe";
-import { useLoading } from "@/contexts/LoadingContext";
 import { ProjectType } from "@/models/Product";
 import { decodeId } from "@/utils/hash";
 import { useTranslations } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Head from "next/head";
 
 // Types
 interface ProductData {
@@ -29,7 +29,7 @@ interface ProductResponse {
 // Custom hooks
 const useProduct = (id: string) => {
   const [product, setProduct] = useState<ProductResponse | null>(null);
-  const { loading, setLoading } = useLoading();
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -296,9 +296,24 @@ export default function ProductDetailPage() {
   ];
 
   const images = parseImages(product?.data?.listImages || []);
+  const mainImage = images[0];
 
   return (
     <>
+      <Head>
+        <title>{product?.data?.name}</title>
+        <meta property="og:title" content={product?.data?.name} />
+        <meta property="og:image" content={mainImage} />
+        <meta
+          property="og:description"
+          content={`Khu vực: ${product?.data?.area} - Chủ đầu tư: ${product?.data?.investor}`}
+        />
+        <meta property="og:type" content="article" />
+        <meta
+          property="og:url"
+          content={typeof window !== "undefined" ? window.location.href : ""}
+        />
+      </Head>
       <div className="container mx-auto px-6 xl:px-0">
         <div className="py-10 lg:py-20">
           <Breadcrumbs
