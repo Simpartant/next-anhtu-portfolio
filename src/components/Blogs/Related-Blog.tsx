@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "next-intl";
 import BlogCard from "./BlogCard";
 import { useEffect, useState } from "react";
 
@@ -14,11 +15,17 @@ interface RelatedBlogsProps {
   id: string;
 }
 
+function getRandomBlogs(arr: Blog[], n: number) {
+  const shuffled = arr.slice().sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, n);
+}
+
 export default function RelatedBlogs({ id }: RelatedBlogsProps) {
   const [blogs, setBlogs] = useState<Blog[]>([]);
-  //   const t = useTranslations("BlogPage");
 
-  const firstThreeBlogs = blogs.slice(0, 3);
+  const t = useTranslations("BlogPage");
+
+  const randomThreeBlogs = getRandomBlogs(blogs, 3);
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -41,9 +48,9 @@ export default function RelatedBlogs({ id }: RelatedBlogsProps) {
 
   return (
     <div className="py-4 px-6 xl:px-0 md:py-20">
-      <div className="text-3xl">RELATED BLOGS</div>
+      <div className="text-3xl">{t("relatedBlogs")}</div>
       <div className="flex flex-col gap-8 lg:flex-row justify-between mt-12">
-        {firstThreeBlogs.map((blog, index) => (
+        {randomThreeBlogs.map((blog, index) => (
           <BlogCard
             key={index + blog._id}
             id={blog._id}

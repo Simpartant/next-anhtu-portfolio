@@ -50,7 +50,8 @@ declare const messages: {
       "author": "Author",
       "createDate": "Create Date",
       "information": "Blog Information"
-    }
+    },
+    "relatedBlogs": "RELATED BLOGS"
   },
   "ProductPage": {
     "title": "PRODUCTS",

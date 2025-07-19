@@ -34,10 +34,5 @@ export default async function BlogDetailPage({ params }: Props) {
   const { id } = await params;
   const blog = await fetchBlogById(id);
 
-  const prevPage = [
-    { name: "Trang chủ", href: "/" },
-    { name: "Blogs", href: "/blogs" },
-  ];
-
-  return <BlogDetail data={blog} prevPage={prevPage} />;
+  return <BlogDetail data={blog} />;
 }

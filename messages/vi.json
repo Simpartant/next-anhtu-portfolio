@@ -47,7 +47,8 @@
       "author": "Tác giả",
       "createDate": "Ngày tạo",
       "information": "Thông tin bài viết"
-    }
+    },
+    "relatedBlogs": "BÀI VIẾT LIÊN QUAN"
   },
   "ProductPage": {
     "title": "SẢN PHẨM",

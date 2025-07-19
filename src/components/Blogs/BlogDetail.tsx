@@ -8,7 +8,6 @@ import { useTranslations } from "next-intl";
 
 interface Props {
   data: BlogDetailProps;
-  prevPage: { name: string; href: string }[];
 }
 
 interface BlogDetailProps {
@@ -21,9 +20,13 @@ interface BlogDetailProps {
   createdAt: string;
 }
 
-export default function BlogDetail({ data, prevPage }: Props) {
+export default function BlogDetail({ data }: Props) {
   const t = useTranslations("BlogPage.detail");
 
+  const prevPage = [
+    { name: t("home"), href: "/" },
+    { name: t("blogs"), href: "/blogs" },
+  ];
   return (
     <>
       <div className="container mx-auto px-6 xl:px-0">

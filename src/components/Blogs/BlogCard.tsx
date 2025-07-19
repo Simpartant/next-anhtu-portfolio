@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface BlogCardProps {
   id: string;
@@ -28,9 +28,22 @@ export default function BlogCard({
   createdAt,
 }: BlogCardProps) {
   const t = useTranslations("BlogPage");
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/blogs/${id}`);
+  };
 
   return (
-    <Link href={`/blogs/${id}`} className="block">
+    <div
+      className="block cursor-pointer"
+      onClick={handleClick}
+      tabIndex={0}
+      role="button"
+      onKeyDown={(e) => {
+        if (e.key === "Enter") handleClick();
+      }}
+    >
       <div className="bg-primary-2 lg:max-w-lg shadow-sm hover:shadow-lg transition rounded-[30px] rounded-t-lg flex flex-col h-full mx-auto">
         <figure>
           <Image
@@ -54,6 +67,6 @@ export default function BlogCard({
           </p>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
